@@ -1,6 +1,6 @@
 # proto-amazon-checkout
 
-> Amamzon checkout redesign concept
+> Amazon checkout redesign concept
 
 ## Build Setup
 
