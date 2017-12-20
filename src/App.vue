@@ -21,6 +21,24 @@ export default {
         date: 'Nov 7 2017',
         iterations: [
           {
+            name: 'B',
+            description: 'Cart design',
+            versions: [
+              {
+                name: '1',
+                description: 'Basic layout and items management'
+              },
+              {
+                name: '2',
+                description: 'Feature: quick preview'
+              },
+              {
+                name: '3',
+                description: 'Animation, composition, details'
+              }
+            ]
+          },
+          {
             name: 'A',
             description: 'Navigation design',
             versions: [

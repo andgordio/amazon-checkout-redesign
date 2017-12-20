@@ -9,11 +9,11 @@
         </div>
         <div class="padding-vert-xs flexy">
           <div class="fixed text-grey" style="width: 120px;">Latest iteration:</div>
-          <div>Testing different navigation design</div>
+          <div>Shopping cart design</div>
         </div>
         <div class="padding-vert-xs flexy">
           <div class="fixed text-grey" style="width: 120px;">Latest versions:</div>
-          <div><router-link tag="a" to="/A/1">Checkout-centric design</router-link> and <router-link tag="a" to="/A/2">Steps-based design</router-link></div>
+          <div><router-link tag="a" to="/B/3">B3: Animations, composition, details</router-link></div>
         </div>
       </div>
       <hr>
@@ -24,7 +24,7 @@
         </div>
         <div class="padding-vert-xs flexy">
           <div class="fixed text-grey" style="width: 120px;">Latest update:</div>
-          <div>Nov 3</div>
+          <div>Nov 22</div>
         </div>
       </div>
     </div>

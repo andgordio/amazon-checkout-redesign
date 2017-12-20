@@ -36,8 +36,8 @@
 
           <div v-for="(iteration, i) in managerProps.iterations" :key="i">
             <div class=" padding-hor-l padding-top-m">
-              <h3>Iteration {{iteration.name}}</h3>
-              <p>{{iteration.description}}</p>
+              <h3>{{iteration.description}}</h3>
+              <p>Iteration {{iteration.name}}</p>
             </div>
             <ul class="list">
               <li v-for="(version, j) in iteration.versions" :key="j" @click="openPrototype(iteration.name,version.name)">
