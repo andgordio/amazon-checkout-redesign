@@ -18,7 +18,7 @@ export default {
         description: 'An attempt to improve the perfect',
         author: 'And Gordy',
         website: 'http://twitter.com/andgordy',
-        date: 'Nov 7 2017',
+        date: 'Jan 3 2017',
         iterations: [
           {
             name: 'C',
