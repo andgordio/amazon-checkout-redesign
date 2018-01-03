@@ -21,7 +21,7 @@
             <div>1 555 374 82 96</div>
           </div> -->
           <div v-for="(address, i) in addresses" :key="i" @click="choosePressed(i)" class="hoverableItem clickable flexy" style="border-bottom: 1px solid #DDE1EB;">
-            <div class="fixed checkmark" style="width: 72px; height: 72px; text-align:center; color: #409EFF;" :class="{selected: i === selectedAddress}">
+            <div class="fixed checkmark" style="width: 72px; height: 24px; text-align:center; color: #409EFF;" :class="{selected: i === selectedAddress}">
               <span class=""></span>
             </div> <!--v-if="i === selectedAddress"-->
             <div style="padding: 12px 24px 12px 0;" >

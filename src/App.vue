@@ -25,20 +25,20 @@ export default {
             description: 'Shipping and payment design',
             versions: [
               {
-                name: '1',
-                description: 'Basic layout, functionality and validation'
-              },
-              {
-                name: '2a',
-                description: 'Instance manager: quick selection + manager'
+                name: '3',
+                description: 'Login, animation, layout'
               },
               {
                 name: '2b',
                 description: 'Instance manager: quick menu only'
               },
               {
-                name: '3',
-                description: 'Animation, composition, details'
+                name: '2a',
+                description: 'Instance manager: quick selection + manager'
+              },
+              {
+                name: '1',
+                description: 'Basic layout, functionality and validation'
               }
             ]
           },
@@ -47,16 +47,16 @@ export default {
             description: 'Cart design',
             versions: [
               {
-                name: '1',
-                description: 'Basic layout and items management'
+                name: '3',
+                description: 'Animation, composition, details'
               },
               {
                 name: '2',
                 description: 'Feature: quick preview'
               },
               {
-                name: '3',
-                description: 'Animation, composition, details'
+                name: '1',
+                description: 'Basic layout and items management'
               }
             ]
           },
@@ -65,12 +65,12 @@ export default {
             description: 'Navigation design',
             versions: [
               {
-                name: '1',
-                description: 'Checkout-centric approach'
-              },
-              {
                 name: '2',
                 description: 'Steps-based design'
+              },
+              {
+                name: '1',
+                description: 'Checkout-centric approach'
               }
             ]
           }

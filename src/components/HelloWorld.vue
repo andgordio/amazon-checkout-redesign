@@ -9,11 +9,11 @@
         </div>
         <div class="padding-vert-xs flexy">
           <div class="fixed text-grey" style="width: 120px;">Latest iteration:</div>
-          <div>Shopping cart design</div>
+          <div>Shipping and payment design</div>
         </div>
         <div class="padding-vert-xs flexy">
           <div class="fixed text-grey" style="width: 120px;">Latest versions:</div>
-          <div><router-link tag="a" to="/B/3">B3: Animations, composition, details</router-link></div>
+          <div><router-link tag="a" to="/C/3">C3: Login, animation, layout</router-link></div>
         </div>
       </div>
       <hr>
