@@ -96,22 +96,26 @@ li {
 }
 
 .menu-button-container {
+  z-index: 600;
   position: fixed;
   bottom: 24px;
   right: 24px;
 }
 
 .content-container {
+  z-index: 700;
   position: fixed;
   width: 360px;
   height: 100vh;
   right: 0px;
   bottom: 0px;
   background-color: #F5F8FF;
+  overflow: scroll;
   // border-left: 1px solid #D8DCE5;
 }
 
 .shade {
+  z-index: 601;
   position: fixed;
   width: 100vw;
   height: 100vh;

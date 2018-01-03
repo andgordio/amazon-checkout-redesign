@@ -21,6 +21,28 @@ export default {
         date: 'Nov 7 2017',
         iterations: [
           {
+            name: 'C',
+            description: 'Shipping and payment design',
+            versions: [
+              {
+                name: '1',
+                description: 'Basic layout, functionality and validation'
+              },
+              {
+                name: '2a',
+                description: 'Instance manager: quick selection + manager'
+              },
+              {
+                name: '2b',
+                description: 'Instance manager: quick menu only'
+              },
+              {
+                name: '3',
+                description: 'Animation, composition, details'
+              }
+            ]
+          },
+          {
             name: 'B',
             description: 'Cart design',
             versions: [
