@@ -34,7 +34,7 @@
       <div class="text-grey">Prototype Manager navigation is here</div> 
     </div>
     <div style="position: fixed; bottom: 65px; right: 80px;">
-      <img src="../../../assets/pui-icons-v-0-1/img-arrow-pm.png" width="32px">
+      <img src="./../assets/pui-icons-v-0-1/img-arrow-pm.png" width="32px">
     </div> -->
   </div>
 </template>

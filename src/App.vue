@@ -117,5 +117,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../assets/pui-v-0-2.scss';
+@import 'pui-v-0-2.scss';
 </style>

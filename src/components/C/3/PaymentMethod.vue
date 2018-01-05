@@ -10,7 +10,7 @@
         </h2>
         <div class="fixed" style="width: 16px;" @click="$emit('cancelled')">
           <button>
-            <img src="../../../../../assets/pui-icons-v-0-1/icn-close.png" class="button-icon" style="opacity: 1; padding-top: 4px;">
+            <img src="./../../../assets/pui-icons-v-0-1/icn-close.png" class="button-icon" style="opacity: 1; padding-top: 4px;">
           </button>
         </div>
       </div>
