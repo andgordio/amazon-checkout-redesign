@@ -2,7 +2,7 @@
   <div>
     <div class="menu-button-container">
       <button class="round text-grey" style="background-color:white; box-shadow: 0px 4px 16px rgba(0,0,0,0.1)" @click="toggleManager = !toggleManager">
-        <img src="../../../assets/pui-icons-v-0-1/icn-hamburger.png" class="button-icon" v-if="isHome">
+        <img src="./../assets/pui-icons-v-0-1/icn-hamburger.png" class="button-icon" v-if="isHome">
         <span v-else>{{selectedVersion}}</span>
       </button>
     </div>
@@ -16,7 +16,7 @@
           <h3>Prototype manager</h3>
           <div class="fixed" style="width: 24px;" @click="toggleManager = !toggleManager">
             <button>
-              <img src="../../../assets/pui-icons-v-0-1/icn-close.png" class="button-icon">
+              <img src="./../assets/pui-icons-v-0-1/icn-close.png" class="button-icon">
             </button>
           </div>
         </div>

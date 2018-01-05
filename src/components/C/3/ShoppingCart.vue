@@ -37,7 +37,7 @@
                     </div>
                     <div class="fixed" style="width: 20px; margin-right: 12px; padding-top: 6px;">
                       <button @click="xPressed(i)" v-if="!item.isXPressed">
-                        <img src="../../../../../assets/pui-icons-v-0-1/icn-close.png" class="button-icon" style="opacity:1;">
+                        <img src="./../../../assets/pui-icons-v-0-1/icn-close.png" class="button-icon" style="opacity:1;">
                       </button>
                       <div v-if="item.isXPressed">
                         <div @click="xPressed(i)" style="position: absolute; z-index: 90; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0,0,0,0.2)"></div>

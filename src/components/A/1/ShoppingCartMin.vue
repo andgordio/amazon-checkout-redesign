@@ -3,7 +3,7 @@
     <h3>Shopping cart</h3>
     <div class="padding-vert-m flexy align-top" v-for="(item, i) in cart" :key="i">
       <div class="fixed" style="width: 60px;">
-        <img src="../../../../../assets/pui-icons-v-0-1/img-placeholder-vert.png" width="40px">
+        <img src="./../../../assets/pui-icons-v-0-1/img-placeholder-vert.png" width="40px">
       </div>
       <div>
         <div>{{item.name}}</div>

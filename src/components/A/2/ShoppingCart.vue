@@ -6,7 +6,7 @@
       <div class="padding-vert-m padding-hor-l bordered rounded">
         <div class="padding-vert-m flexy" v-for="(item, i) in cart" :key="i">
           <div class="fixed" style="width: 100px;">
-            <img src="../../../../../assets/pui-icons-v-0-1/img-placeholder-vert.png" width="75px">
+            <img src="./../../../assets/pui-icons-v-0-1/img-placeholder-vert.png" width="75px">
           </div>
           <div>{{item.name}}</div>
           <div class="fixed" style="width: 100px;">$ {{item.price}}</div>
