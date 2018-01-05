@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="menu-button-container">
-      <button class="round text-grey" style="background-color:white; box-shadow: 0px 4px 16px rgba(0,0,0,0.1)" @click="toggleManager = !toggleManager">
-        <img src="../../../assets/pui-icons-v-0-1/icn-hamburger.png" class="button-icon" v-if="isHome">
+      <button class="round text-grey" :class="{fab: $route.name === 'HelloWorld'}" style="background-color:white; box-shadow: 0px 4px 16px rgba(0,0,0,0.1)" @click="openManager()">
+        <img src="../../../assets/pui-icons-v-0-1/icn-hamburger-white.png" class="button-icon" v-if="isHome" style="opacity: 0.6">
         <span v-else>{{selectedVersion}}</span>
       </button>
     </div>
@@ -12,7 +12,8 @@
     </transition>
     <transition name="toggleManager">
       <div v-if="toggleManager" class="content-container" style="">
-        <div class="flexy padding-vert-m padding-hor-m prototype-header" style="">
+
+        <div class="flexy padding-vert-m padding-hor-m prototype-header" :class="{shadowy: didScroll}" style="flex: 0 0 auto; min-height: 56px; z-index: 100; transition: all .4s;">
           <h3 style="font-size: 22px; padding-left: 8px;">Prototype manager</h3>
           <div class="fixed" style="width: 24px; height: 24px;" @click="toggleManager = !toggleManager">
             <button>
@@ -20,13 +21,14 @@
             </button>
           </div>
         </div>
-        <div>
+
+        <div id="watchMeScroll" @scroll="checkScrollPosition" style="flex: 1 1 auto; overflow-y:scroll;">
           <!-- <div class="padding-hor-l padding-vert-m"> -->
             <!-- <h1>{{managerProps.name}}</h1> -->
             <!-- <p>{{managerProps.description}}</p> -->
             <!-- <p class="grey">Created by <a :href="managerProps.website" target="_blank">{{managerProps.author}}</a> on {{managerProps.date}}</p> -->
           <!-- </div> -->
-          <ul class="list borderless" style="margin-top: 12px;">
+          <ul class="list borderless" style="margin-top: 24px;">
             <li @click="goHome()" :class="{selected: $route.name === 'HelloWorld'}">
               <div class="content">
                 <div class="title">Home</div>
@@ -63,6 +65,8 @@ export default {
   ],
   data () {
     return {
+      scrollable: null,
+      didScroll: false,
       toggleManager: false
     }
   },
@@ -75,6 +79,19 @@ export default {
     }
   },
   methods: {
+    checkScrollPosition () {
+      if (this.scrollable.scrollTop > 10) {
+        this.didScroll = true
+      } else {
+        this.didScroll = false
+      }
+    },
+    openManager () {
+      this.toggleManager = true
+      setTimeout(() => {
+        this.scrollable = document.getElementById('watchMeScroll')
+      }, 500)
+    },
     openPrototype (iteration, version) {
       this.toggleManager = false
       this.$router.push('/' + iteration + '/' + version)
@@ -86,17 +103,28 @@ export default {
     isSelected (iteration, version) {
       return this.$route.name === iteration + '' + version
     }
+  },
+  created () {
+    //
   }
 }
 </script>
 
 <style lang="scss" scoped>
-li {
-  background-color: white;
+// li {
+//   background-color: white;
 
-  &:hover {
-    background-color: white;
-  }
+//   &:hover {
+//     background-color: white;
+//   }
+// }
+
+.shadowy {
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+}
+
+.fab {
+  background-color: #409EFF !important;
 }
 
 .menu-button-container {
@@ -116,7 +144,9 @@ li {
   bottom: 0px;
   // background-color: #F5F8FF;
   background-color: white;
-  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  // overflow: scroll;
   // border-left: 1px solid #D8DCE5;
 }
 
@@ -182,12 +212,16 @@ h4 {
 }
 .toggleManager-enter, .toggleManager-leave-to /* .fade-leave-active below version 2.1.8 */ {
   transform: translate(360px, 0);
-  opacity: 0;
+  // opacity: 0;
 }
 
-.toggleShade-enter-active, .toggleShade-leave-active {
-  transition: all .2s;
+.toggleShade-enter-active {
+  transition: all .3s;
 }
+.toggleShade-leave-active {
+  transition: all .4s;
+}
+
 .toggleShade-enter, .toggleShade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }

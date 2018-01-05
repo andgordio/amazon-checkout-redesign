@@ -10,6 +10,7 @@ import C1 from '@/components/C/1/C1.vue'
 import C2a from '@/components/C/2a/C2a.vue'
 import C2b from '@/components/C/2b/C2b.vue'
 import C3 from '@/components/C/3/C3.vue'
+import D1 from '@/components/D/1/D1.vue'
 
 Vue.use(Router)
 
@@ -64,6 +65,11 @@ export default new Router({
       path: '/C/3',
       name: 'C3',
       component: C3
+    },
+    {
+      path: '/D/1',
+      name: 'D1',
+      component: D1
     }
   ]
 })

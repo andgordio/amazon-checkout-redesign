@@ -21,6 +21,28 @@ export default {
         date: 'Jan 3 2017',
         iterations: [
           {
+            name: 'D',
+            description: 'Final tasks ?~?~?~?~?',
+            versions: [
+              // {
+              //   name: '3',
+              //   description: 'Login, animation, layout'
+              // },
+              // {
+              //   name: '2b',
+              //   description: 'Instance manager: quick menu only'
+              // },
+              // {
+              //   name: '2a',
+              //   description: 'Instance manager: quick selection + manager'
+              // },
+              {
+                name: '1',
+                description: 'Design and layout'
+              }
+            ]
+          },
+          {
             name: 'C',
             description: 'Shipping and payment design',
             versions: [
