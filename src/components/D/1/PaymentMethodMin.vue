@@ -1,46 +1,55 @@
 <template>
 <transition name="info-appear" appear>
-  <div class="padding-vert-m padding-hor-l fixed" style="width: 49%">
-    <h3 style="font-size: 19px;">Payment information</h3>
-    <div class="padding-vert-m" v-if="selectedPayment === null">
-      <button class="boxed primary" @click="addPressed()">Add payment method</button>
-      <div style="font-size: 14px; padding-top:12px; "><button @click="openSignIn()" style="color:#409EFF; border-bottom: 1px dashed; border-radius: 0; cursor: pointer;">Sign in</button> for 1-click checkout</div>
+  <div class="fixed flexy align-top" style="width: 50%; padding-right: 40px;">
+    <div class="fixed" style="width: 48px; margin-right: 12px;">
+      <img src="./../../../assets/icn-check-payment.png" style="width:48px;" alt="">
     </div>
-    <div class="padding-vert-m" v-else>
-      <div>{{payments[selectedPayment].name}}</div>
-      <div class="text-grey" style="padding-top: 4px;">{{mutateCardNumber(payments[selectedPayment].number)}}</div>
-      <div class="text-grey" style="padding-top: 4px;">{{payments[selectedPayment].month}} / {{payments[selectedPayment].year}}</div>
-      <div style="color: transparent; width: 0; height: 0; overflow: hidden;">{{reactivator}}</div>
-      <!-- OVERLAY -->
-      <transition name="popover">
-      <div v-if="doShowMethodsList">
-        <div @click="doShowMethodsList=false" class="popover-curtain"></div>
-        <div @click.stop="doNothing" class="popover-content">
-          <div v-for="(payment, i) in payments" :key="i" @click="choosePressed(i)" class="hoverableItem clickable flexy" style="border-radius: 6px;">
-            <!--<div class="fixed" style="width: 32px; text-align:center; color: #409EFF;"></div> <span v-if="i === selectedAddress">→</span>-->
-            <div style="padding: 12px 24px;"> <!--border-bottom: 1px solid #DDE1EB;-->
-              <div><strong>{{payment.name}}</strong></div>
-              <div>{{payment.number}}</div>
-              <div>{{payment.month}} / {{payment.year}}</div>
+    <div style="padding-top: 12px;">
+      <div style="font-size: 19px; font-weight: 900;">Payment information</div>
+      <div style="padding-top: 12px;" v-if="selectedPayment === null">
+        <button class="boxed primary" style="background-color: #3a84e8;" @click="addPressed()">Add payment method</button>
+        <div style="font-size: 14px; padding-top:12px; "><button @click="openSignIn()" style="font-size: 13px; padding: 3px 8px; color:#3a84e8; border: 1px solid; border-radius: 4px;">Sign in</button> for 1-click checkout</div>
+      </div>
+      <div style="padding-top: 8px;" v-else>
+        <div>{{payments[selectedPayment].name}}</div>
+        <div style="padding-top: 4px;">{{mutateCardNumber(payments[selectedPayment].number)}}</div>
+        <div style="padding-top: 4px;">{{payments[selectedPayment].month}} / {{payments[selectedPayment].year}}</div>
+        <div style="color: transparent; width: 0; height: 0; overflow: hidden;">{{reactivator}}</div>
+        <!-- OVERLAY -->
+        <transition name="popover">
+        <div v-if="doShowMethodsList">
+          <div @click="doShowMethodsList=false" class="popover-curtain"></div>
+          <div @click.stop="doNothing" class="popover-content">
+            <div v-for="(payment, i) in payments" :key="i" @click="choosePressed(i)" class="hoverableItem clickable flexy" style="border-radius: 6px;">
+              <!--<div class="fixed" style="width: 32px; text-align:center; color: #409EFF;"></div> <span v-if="i === selectedAddress">→</span>-->
+              <div style="padding: 12px 24px;"> <!--border-bottom: 1px solid #DDE1EB;-->
+                <div><strong>{{payment.name}}</strong></div>
+                <div>{{payment.number}}</div>
+                <div>{{payment.month}} / {{payment.year}}</div>
+              </div>
             </div>
-          </div>
-          <div class="hoverableItem clickable flexy" @click="addNewPaymentPressed" style="border-radius: 6px; margin-top:4px;">
-            <!-- <div class="fixed" style="width: 32px; text-align:center; color: #409EFF;"></div> -->
-            <div style="padding: 12px 24px" >
-              <button style="font-weight: 400; color: #409EFF;">Add new payment</button>
+            <div class="hoverableItem clickable flexy" @click="addNewPaymentPressed" style="border-radius: 6px; margin-top:4px;">
+              <!-- <div class="fixed" style="width: 32px; text-align:center; color: #409EFF;"></div> -->
+              <div style="padding: 12px 24px" >
+                <button style="font-weight: 400; color: #409EFF;">Add new payment</button>
+              </div>
             </div>
-          </div>
-          <div class="hoverableItem clickable flexy" @click="managePaymentPressed" style="border-radius: 6px;">
-            <!-- <div class="fixed" style="width: 32px; text-align:center; color: #409EFF;"></div> -->
-            <div style="padding: 12px 24px" >
-              <button style="font-weight: 400; color: #409EFF;">Manage payment methods</button>
+            <div class="hoverableItem clickable flexy" @click="managePaymentPressed" style="border-radius: 6px;">
+              <!-- <div class="fixed" style="width: 32px; text-align:center; color: #409EFF;"></div> -->
+              <div style="padding: 12px 24px" >
+                <button style="font-weight: 400; color: #409EFF;">Manage payment methods</button>
+              </div>
             </div>
           </div>
         </div>
+        </transition>
+        <!-- end of OVERLAY -->
+        <div class="padding-vert-s">
+          <button style="font-size: 13px; min-width: 88px; padding: 3px 0; color:#3a84e8; border: 1px solid; border-radius: 4px;" @click="changePressed()">
+            Change
+          </button>
+        </div>
       </div>
-      </transition>
-      <!-- end of OVERLAY -->
-      <div class="padding-vert-s"><button style="color:#409EFF; border-bottom: 1px dashed; border-radius: 0;" @click="changePressed()">Change</button></div>
     </div>
   </div>
 </transition>

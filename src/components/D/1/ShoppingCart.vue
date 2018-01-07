@@ -37,7 +37,7 @@
                     </div>
                     <div class="fixed" style="width: 20px; margin-right: 12px; padding-top: 6px;">
                       <button @click="xPressed(i)" v-if="!item.isXPressed">
-                        <img src="../../../../../assets/pui-icons-v-0-1/icn-close.png" class="button-icon" style="opacity:1;">
+                        <img src="./../../../assets/pui-icons-v-0-1/icn-close.png" class="button-icon" style="opacity:1;">
                       </button>
                       <div v-if="item.isXPressed">
                         <div @click="xPressed(i)" style="position: absolute; z-index: 90; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0,0,0,0.2)"></div>
@@ -247,6 +247,7 @@ export default {
     },
     removeItemPressed (index) {
       this.items.splice(index, 1)
+      this.$emit('updated', this.items)
     },
     xPressed (index) {
       this.items[index].isXPressed = !this.items[index].isXPressed
@@ -264,6 +265,7 @@ export default {
       tempItem['isBeingAddedToCart'] = false
       this.later.push(this.items[index])
       this.items.splice(index, 1)
+      this.$emit('updated', this.items)
     },
     addFromLaterPressed (index) {
       this.later[index].isBeingAddedToCart = true
@@ -271,6 +273,7 @@ export default {
       setTimeout(() => {
         this.later.splice(index, 1)
       }, 500)
+      this.$emit('updated', this.items)
     },
     addFromAlsoPressed (index) {
       this.also[index].isBeingAddedToCart = true
@@ -284,6 +287,7 @@ export default {
           this.extra.splice(0, 1)
         }
       }, 1000)
+      this.$emit('updated', this.items)
     },
     addFromRecentPressed (index) {
       this.recent[index].isBeingAddedToCart = true
@@ -297,6 +301,7 @@ export default {
           this.extra.splice(0, 1)
         }
       }, 1000)
+      this.$emit('updated', this.items)
       // var rect = element.getBoundingClientRect();
       // console.log(rect.top, rect.right, rect.bottom, rect.left);
       // let lastIndex = this.items.length - 1
@@ -323,6 +328,7 @@ export default {
         this.addFromLaterPressed(item.index)
       }
       this.doShowPreview = false
+      this.$emit('updated', this.items)
     },
     openPreview (section, index) {
       if (section === 'items') {

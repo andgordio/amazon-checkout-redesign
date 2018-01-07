@@ -35,7 +35,7 @@
         <div class="fixed padding-hor-l flexy align-center lineoneinit" style="width: 140px; cursor: pointer;" v-if="currentView === 'Start' || currentView === 'ShoppingCart'" @click="currentView = 'ShoppingCart'">
           <div style="position: relative;">
             <div><img src="./../../../assets/icn-cart.png" style="width: 38px;  padding-top: 6px;" alt=""></div>
-            <div style="position: absolute; top: -1px; left: 11px; width: 24px; text-align:center; color: #FF9900; font-weight: 900; font-size: 16px;">2</div>
+            <div style="position: absolute; top: -1px; left: 11px; width: 24px; text-align:center; color: #FF9900; font-weight: 900; font-size: 16px;">{{cart.length}}</div>
           </div>
           <div style="font-size: 18px; font-weight: 900;">
             cart
@@ -96,6 +96,7 @@
                     :recentItems="recentItems"
                     :extraItems="extraItems"
                     :laterItems="laterItems"
+                    @updated = "shoppingCartUpdated($event)"
                     @confirmed="shoppingCartConfirmed($event)"/>
     <!--SHIPPING ADDRESS--><ShippingAddress  v-if="doShowAddressManager"
                       :mode="addressMode"
@@ -121,13 +122,10 @@
     <!--EXTRA SIGNUP--><ExtraSignup  v-if="currentView === 'ExtraSignup'"/>
 
     <!--CHECKOUT--><div id="checkout" v-if="currentView === 'Checkout'">
-      <div class="padding-hor-l" style="background-color: #f1f3f7; min-height: 100vh;">
-        <div class="padding-vert-m flexy">
-          <!-- <h1>Checkout</h1> -->
-        </div>
+      <div>
         <div class="flexy align-top">
-          <div class="padding-vert-s">
-            <div class="flexy align-stretch">
+          <div class="padding-vert-l">
+            <div class="flexy align-stretch" style="">
               <!--SHIPPING ADDRESS MIN-->
               <ShippingAddressMin   :selectedAddress="selectedAddress"
                                     :addresses="addresses"
@@ -137,7 +135,6 @@
                                     @change="changeAddressSelected($event)"
                                     @manage="manageAddressPressed()"
                                     />
-              <div class="fixed" style="width: 2%"></div>
               <!--PAYMENT METHOD MIN-->
               <PaymentMethodMin     :selectedPayment="selectedPayment"
                                     :payments="payments"
@@ -148,16 +145,15 @@
                                     @manage="managePaymentPressed()"
                                     />
             </div>
-            <div class="padding-vert-xs"></div>
-            <div class="flexy align-stretch">
-              <!--SHOPPING CART MIN--><ShoppingCartMin  :cart="cart"
-                                                        @edit="currentView = 'ShoppingCart'"/>
-              <div class="fixed" style="width: 2%"></div>
-              <!--DELIVERY MIN--><Delivery :chosenDelivery="chosenDelivery"/>
+            <div class="flexy align-stretch" style="padding-top: 32px;">
+              <!--SHOPPING CART MIN-->
+              <ShoppingCartMin  :cart="cart"
+                                @edit="currentView = 'ShoppingCart'"/>
+              <!--DELIVERY MIN-->
+              <Delivery         :chosenDelivery="chosenDelivery"/>
             </div>
             
           </div>
-          <div class="fixed" style="width: 24px;"></div>
           <!--SUMMARY--><OrderSummary   :selectedAddress="selectedAddress"
                                         :selectedPayment="selectedPayment"
                                         @placed="currentView = 'ExtraSignup'"/>
@@ -360,6 +356,9 @@ export default {
       this.currentView = 'Checkout'
       this.cart = items
     },
+    shoppingCartUpdated (items) {
+      this.cart = items
+    },
     //
     // ADDRESS
     addAddressPressed () {
@@ -469,7 +468,7 @@ export default {
         state: 'Illinois',
         zip: '10101',
         country: 'United States',
-        phone: '11111111'
+        phone: '+1 800 555 66 77'
       })
       this.addresses.push({
         name: 'Sam Bell',
@@ -478,7 +477,7 @@ export default {
         state: 'Illinois',
         zip: '10114',
         country: 'United States',
-        phone: '222222222'
+        phone: '+1 800 555 00 11'
       })
       this.payments.push({
         name: 'Sam Bell',
@@ -510,10 +509,11 @@ export default {
 }
 
 .lineoneinit-enter-active, .lineoneinit-leave-active {
-  transition: height .2s;
+  transition: all .2s;
 }
 .lineoneinit-enter, .lineoneinit-leave-to {
   height: 0;
+  opacity: 0;
 }
 //
 .lineonecheckout-enter-active {
@@ -534,5 +534,6 @@ export default {
 }
 .linetwo-enter, .linetwo-leave-to {
   height: 0;
+  opacity: 0;
 }
 </style>

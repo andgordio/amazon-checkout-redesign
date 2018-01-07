@@ -1,23 +1,27 @@
 <template>
 <transition name="info-appear" appear>
-  <div class="padding-vert-m padding-hor-l fixed" style="width: 49%">
-    <h3 style="font-size: 19px;">Shopping cart</h3>
-    <div class="padding-vert-xs"></div>
-    <div class="padding-vert-m flexy align-top" v-for="(item, i) in cart" :key="i">
-      <div class="fixed" style="width: 60px;">
-        <img :src="item.img" width="40px">
-      </div>
-      <div>
-        <div>{{item.name}}</div>
-        <div class="text-grey" style="padding-top: 4px;">${{item.price}}</div>
-        <div class="text-grey" style="padding-top: 4px;">Quantity: {{item.quantity}}</div>
-      </div>
-      <!-- <div class="fixed" style="width: 100px;">$ {{item.price}}</div>
-      <div class="fixed" style="width: 100px;">{{item.quantity}}</div>
-      <div class="fixed" style="width: 20px;">x</div> -->
+  <div class="padding-vert-m padding-hor-l fixed flexy align-top" style="width: 50%">
+    <div class="fixed" style="width: 48px; margin-right: 12px;">
+      <img src="./../../../assets/icn-check-cart.png" style="width:48px;" alt="">
     </div>
-    <div class="">
-      <button style="color:#409EFF; border-bottom: 1px dashed; border-radius: 0;" @click="editPressed()">Edit</button>
+    <div style="padding-top: 12px;">
+      <div style="font-size: 19px; font-weight: 900; padding-bottom: 8px;">Shopping cart</div>
+      <div class="flexy align-top" style="padding-top: 10px;" v-for="(item, i) in cart" :key="i">
+        <div class="fixed" style="width: 64px; margin-right: 16px;">
+          <img :src="item.img" width="64px">
+        </div>
+        <div>
+          <div>{{item.name}}</div>
+          <div class="text-grey" style="font-size: 14px; padding-top: 6px;">${{item.price}}</div>
+          <div class="text-grey" style="font-size: 14px; padding-top: 2px;">x{{item.quantity}}</div>
+        </div>
+        <!-- <div class="fixed" style="width: 100px;">$ {{item.price}}</div>
+        <div class="fixed" style="width: 100px;">{{item.quantity}}</div>
+        <div class="fixed" style="width: 20px;">x</div> -->
+      </div>
+      <div style="padding-top: 12px;">
+        <button style="font-size: 13px; min-width: 88px; padding: 3px 0; color:#3a84e8; border: 1px solid; border-radius: 4px;" @click="editPressed()">Edit</button>
+      </div>
     </div>
   </div>
 </transition>

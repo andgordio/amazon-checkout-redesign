@@ -2,7 +2,7 @@
   <div>
     <div class="menu-button-container">
       <button class="round text-grey" :class="{fab: $route.name === 'HelloWorld'}" style="background-color:white; box-shadow: 0px 4px 16px rgba(0,0,0,0.1)" @click="openManager()">
-        <img src="./../assets/pui-icons-v-0-1/icn-hamburger.png" class="button-icon" v-if="isHome" style="opacity: 0.6">
+        <img src="./../assets/pui-icons-v-0-1/icn-hamburger-white.png" class="button-icon" v-if="isHome" style="opacity: 0.6">
         <span v-else>{{selectedVersion}}</span>
       </button>
     </div>

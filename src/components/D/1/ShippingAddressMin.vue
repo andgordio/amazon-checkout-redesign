@@ -1,62 +1,64 @@
 <template>
 <transition name="info-appear" appear>
-  <div class="rounded padding-vert-m padding-hor-l fixed" style="width: 49%">
-    <h3 style="font-size: 19px;">Shipping address</h3>
-    <div class="padding-vert-m" v-if="selectedAddress === null">
-      <button class="boxed primary" @click="addPressed">Add shipping address</button>
-      <div style="font-size: 14px; padding-top:12px; "><button @click="openSignIn()" style="color:#409EFF; border-bottom: 1px dashed; border-radius: 0; cursor: pointer;">Sign in</button> for 1-click checkout</div>
+  <div class="padding-hor-l fixed flexy align-top" style="width: 50%">
+    <div class="fixed" style="width: 48px; margin-right: 12px;">
+      <img src="./../../../assets/icn-check-shipping.png" style="width:48px;" alt="">
     </div>
-    <div class="padding-vert-m" v-else>
-      <div>{{reactiveAddresses[selectedAddress].name}}</div>
-      <div class="text-grey" style="padding-top: 4px;">{{reactiveAddresses[selectedAddress].address1}} <!--{{selectedAddress.address2}} --></div>
-      <div class="text-grey" style="padding-top: 4px;">{{reactiveAddresses[selectedAddress].city}}, {{reactiveAddresses[selectedAddress].state}}, {{reactiveAddresses[selectedAddress].country}}</div>
-      <div class="text-grey" style="padding-top: 4px;">{{reactiveAddresses[selectedAddress].phone}}</div>
-      <div style="color: transparent; width: 0; height: 0; overflow: hidden;">{{reactivator}}</div>
-      <!-- OVERLAY -->
-      <transition name="popover">
-      <div v-if="doShowAddressesList">
-        <div @click="doShowAddressesList=false" class="popover-curtain" style=""></div>
-        <div @click.stop="doNothing" class="popover-content" style="">
-          <!-- <div @click="choosePressed()" style="padding: 12px 0; border-bottom: 1px solid #DDE1EB;" class="hoverableItem clickable">
-            <div><strong>Sam Bell</strong></div>
-            <div>821 Washington St</div>
-            <div>Ashland, Illinois, United States</div>
-            <div>1 555 374 82 96</div>
-          </div> -->
-          <div v-for="(address, i) in addresses" :key="i" @click="choosePressed(i)" class="hoverableItem clickable flexy" style="border-radius: 6px;">
-             <!--<div class="fixed" style="width: 32px; text-align:center; color: #409EFF;"></div> <span v-if="i === selectedAddress">→</span>-->
-            <div :class="{selectedItem: i === selectedAddress}" style="padding: 12px 24px;"> <!-- border-bottom: 1px solid #DDE1EB;-->
-              <div><strong>{{address.name}}</strong></div>
-              <div>{{address.address1}}</div>
-              <div>{{address.city}}, {{address.state}}, {{address.country}}</div>
-              <div>{{address.phone}}</div>
+    <div style="padding-top: 12px;">
+      <div style="font-size: 19px; font-weight: 900;">Shipping address</div>
+      <div style="padding-top: 12px;" v-if="selectedAddress === null">
+        <button class="boxed primary" style="background-color: #3a84e8;" @click="addPressed">Add shipping address</button>
+        <div style="font-size: 14px; padding-top:12px; "><button @click="openSignIn()" style="font-size: 13px; padding: 3px 8px; color:#3a84e8; border: 1px solid; border-radius: 4px;">Sign in</button> for 1-click checkout</div>
+      </div>
+      <div style="padding-top: 8px;" v-else>
+        <div>{{reactiveAddresses[selectedAddress].name}}</div>
+        <div style="padding-top: 4px;">{{reactiveAddresses[selectedAddress].address1}} <!--{{selectedAddress.address2}} --></div>
+        <div style="padding-top: 4px;">{{reactiveAddresses[selectedAddress].city}}, {{reactiveAddresses[selectedAddress].state}}, {{reactiveAddresses[selectedAddress].country}}</div>
+        <div style="padding-top: 4px;">{{reactiveAddresses[selectedAddress].phone}}</div>
+        <div style="color: transparent; width: 0; height: 0; overflow: hidden;">{{reactivator}}</div>
+        <!-- OVERLAY -->
+        <transition name="popover">
+        <div v-if="doShowAddressesList">
+          <div @click="doShowAddressesList=false" class="popover-curtain" style=""></div>
+          <div @click.stop="doNothing" class="popover-content" style="">
+            <!-- <div @click="choosePressed()" style="padding: 12px 0; border-bottom: 1px solid #DDE1EB;" class="hoverableItem clickable">
+              <div><strong>Sam Bell</strong></div>
+              <div>821 Washington St</div>
+              <div>Ashland, Illinois, United States</div>
+              <div>1 555 374 82 96</div>
+            </div> -->
+            <div v-for="(address, i) in addresses" :key="i" @click="choosePressed(i)" class="hoverableItem clickable flexy" style="border-radius: 6px;">
+              <!--<div class="fixed" style="width: 32px; text-align:center; color: #409EFF;"></div> <span v-if="i === selectedAddress">→</span>-->
+              <div :class="{selectedItem: i === selectedAddress}" style="padding: 12px 24px;"> <!-- border-bottom: 1px solid #DDE1EB;-->
+                <div><strong>{{address.name}}</strong></div>
+                <div>{{address.address1}}</div>
+                <div>{{address.city}}, {{address.state}}, {{address.country}}</div>
+                <div>{{address.phone}}</div>
+              </div>
             </div>
-          </div>
-          <div class="hoverableItem clickable flexy" @click="addNewAddressPressed" style="border-radius: 6px; margin-top:4px;">
-            <!-- <div class="fixed" style="width: 32px; text-align:center; color: #409EFF;"></div> -->
-            <div style="padding: 12px 24px;">
-              <button style="font-weight: 400; color: #409EFF;">Add new address</button>
+            <div class="hoverableItem clickable flexy" @click="addNewAddressPressed" style="border-radius: 6px; margin-top:4px;">
+              <!-- <div class="fixed" style="width: 32px; text-align:center; color: #409EFF;"></div> -->
+              <div style="padding: 12px 24px;">
+                <button style="font-weight: 400; color: #409EFF;">Add new address</button>
+              </div>
             </div>
-          </div>
-          <div class="hoverableItem clickable flexy" @click="manageAddressesPressed" style="border-radius: 6px;">
-            <!-- <div class="fixed" style="width: 32px; text-align:center; color: #409EFF;"></div> -->
-            <div style="padding: 12px 24px;">
-              <button style="font-weight: 400; color: #409EFF;">Manage addresses</button>
+            <div class="hoverableItem clickable flexy" @click="manageAddressesPressed" style="border-radius: 6px;">
+              <!-- <div class="fixed" style="width: 32px; text-align:center; color: #409EFF;"></div> -->
+              <div style="padding: 12px 24px;">
+                <button style="font-weight: 400; color: #409EFF;">Manage addresses</button>
+              </div>
             </div>
           </div>
         </div>
+        </transition>
+        <!-- end of OVERLAY -->
+        <div style="padding-top: 10px;">
+          <button class="" style="font-size: 13px; min-width: 88px; padding: 3px 0; color:#3a84e8; border: 1px solid; border-radius: 4px;" @click="changePressed">
+            Change
+          </button>
+        </div>
       </div>
-      </transition>
-      <!-- end of OVERLAY -->
-      <div class="padding-vert-s"><button class="" style="color:#409EFF; border-bottom: 1px dashed; border-radius: 0;" @click="changePressed">Change</button></div>
     </div>
-    <!-- <h3>Billing address</h3>
-    <div class="padding-vert-s">
-      <div class="flexy align-top">
-        <input type="checkbox" id="billingChoice1" value="1" class="fixed" style="width: 24px;">
-        <label for="billingChoice1"><div>Same as shipping address</div></label>
-      </div>
-    </div> -->
   </div>
 </transition>
 </template>
