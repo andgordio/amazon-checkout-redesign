@@ -118,12 +118,16 @@
                     @delete="deletePaymentPressed($event)"
                     @saveNew="paymentMethodSaveNew($event)"
                     @saveExisting="paymentMethodSaveExisting($event)"
+                    @backToManager="paymentMethodCancelledBackToManager()"
                     @cancelled="paymentMethodCancelled()"/>
     <!--EXTRA SIGNUP--><ExtraSignup  v-if="currentView === 'ExtraSignup'"/>
 
     <!--CHECKOUT--><div id="checkout" v-if="currentView === 'Checkout'">
       <div>
-        <div class="flexy align-top">
+        <div class="flexy align-stretch" style="flex-direction: row-reverse;">
+          <!--SUMMARY--><OrderSummary   :selectedAddress="selectedAddress"
+                                        :selectedPayment="selectedPayment"
+                                        @placed="currentView = 'ExtraSignup'"/>
           <div class="padding-vert-l">
             <div class="flexy align-stretch" style="">
               <!--SHIPPING ADDRESS MIN-->
@@ -154,9 +158,6 @@
             </div>
             
           </div>
-          <!--SUMMARY--><OrderSummary   :selectedAddress="selectedAddress"
-                                        :selectedPayment="selectedPayment"
-                                        @placed="currentView = 'ExtraSignup'"/>
           <!-- SIGN IN -->
           <SignIn v-if="doShowSignIn" @close="signInClosed()" @login="loginPressed"/>
         </div>
@@ -215,12 +216,12 @@ export default {
       //
       cart: [
         {
-          name: 'Beautiful Evidence',
-          by: 'Edward R. Tufte',
-          img: require('./../../../assets/products/evidence.jpg'),
+          name: 'Sprint: How to Solve Big Problems and Test New Ideas in Just Five Days',
+          by: 'Jake Knapp',
+          img: require('./../../../assets/products/sprint.jpg'),
           seller: 'Amazon',
           availability: 'In Stock',
-          price: 28.87,
+          price: 14.53,
           quantity: 1
         },
         {
@@ -273,12 +274,12 @@ export default {
       ],
       recentItems: [
         {
-          name: 'Sprint: How to Solve Big Problems and Test New Ideas in Just Five Days',
-          by: 'Jake Knapp',
-          img: require('./../../../assets/products/sprint.jpg'),
+          name: 'Beautiful Evidence',
+          by: 'Edward R. Tufte',
+          img: require('./../../../assets/products/evidence.jpg'),
           seller: 'Amazon',
           availability: 'In Stock',
-          price: 14.53,
+          price: 28.87,
           quantity: 1
         },
         {
@@ -451,6 +452,9 @@ export default {
     },
     paymentMethodCancelled () {
       this.doShowPaymentManager = false
+    },
+    paymentMethodCancelledBackToManager () {
+      this.paymentMode = 'manage'
     },
     //
     // SIGN IN

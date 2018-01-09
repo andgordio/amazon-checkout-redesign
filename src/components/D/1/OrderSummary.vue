@@ -1,6 +1,6 @@
 <template>
 <transition name="cart-appear" appear>
-  <div class="padding-hor-xl padding-vert-m fixed" style="width: 32%; background-color: #F5F5F5; min-height: calc(100vh - 60px);">
+  <div class="padding-hor-xl padding-vert-m fixed" style="width: 32%; background-color: #F5F5F5; min-height: 100vh; position: sticky; top: 0; height: 100%;">
     <!-- <h3 style="font-size: 19px;">Order summary</h3> -->
     <div class="padding-hor-m" style="padding-top: 20px;">
     <div style="font-size: 19px; font-weight: 900;">Order summary</div>

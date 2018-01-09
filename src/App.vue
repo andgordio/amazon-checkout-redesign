@@ -22,7 +22,7 @@ export default {
         iterations: [
           {
             name: 'D',
-            description: 'Final tasks ?~?~?~?~?',
+            description: 'Final preparations',
             versions: [
               // {
               //   name: '3',
@@ -38,7 +38,7 @@ export default {
               // },
               {
                 name: '1',
-                description: 'Design and layout'
+                description: 'Layout and style'
               }
             ]
           },

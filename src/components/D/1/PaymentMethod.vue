@@ -2,19 +2,19 @@
 <transition name="modal">
   <div class="modal-mask" style="position: absolute; top: 0; left: 0; z-index: 120; width: 100vw; height: 100vh; background-color: rgba(0,0,0,0.4)">
     <div class="modal-container" style="max-width: 540px; max-height: 100vh; display: flex; flex-direction: column; margin: 0 auto; padding: 24px 0;">
-      <div class="flexy padding-vert-m padding-hor-l" style="border-bottom: 1px solid #DDE1EB; background-color: white; flex: 0 0 auto; height: 64px; border-radius: 10px 10px 0 0;">
-        <h2 style="font-size: 20px;">
+      <div class="flexy padding-hor-xl fixed" style="background-color: white; border-radius: 10px 10px 0 0; padding-top: 24px; padding-bottom: 24px; z-index: 200; transition: all .4s;" :class="{shadowyBottom: didScroll}">
+        <div style="font-size: 24px; font-weight: 900;">
           <span v-if="mode === 'add'">New payment information</span>
           <span v-if="mode === 'edit'">Edit payment information</span>
           <span v-if="mode === 'manage'">Manage payment information</span>
-        </h2>
-        <div class="fixed" style="width: 16px;" @click="$emit('cancelled')">
+        </div>
+        <div class="fixed" style="width: 16px;" @click="$emit('cancelled')" v-if="this.mode === 'manage'">
           <button>
             <img src="./../../../assets/pui-icons-v-0-1/icn-close.png" class="button-icon" style="opacity: 1; padding-top: 4px;">
           </button>
         </div>
       </div>
-      <div class="padding-hor-l" style="overflow: scroll; background-color: white; padding-top: 16px; padding-bottom: 24px;" :class="{roundBottom: mode === 'manage'}">
+      <div class="padding-hor-xl" style="overflow: scroll; background-color: white; padding-top: ; padding-bottom: 12px;" :class="{roundBottom: mode === 'manage'}" id="watchMeScroll" @scroll="checkScrollPosition">
         <!-- MANAGE ADDRESSES -->
         <div v-if="this.mode === 'manage'">
           <div v-for="(payment, i) in payments" :key="i" style="padding: 12px 0;" class="flexy">
@@ -98,9 +98,9 @@
             </div>
           </div>
         </div>
-        <div v-if="this.mode === 'add' || this.mode === 'edit'" class="padding-hor-l" style="border-top: 1px solid #DDE1EB; background-color: white;  flex: 0 0 auto; height: 64px; padding-top: 10px;text-align: right; border-radius: 0 0 10px 10px;">
-          <button class="boxed silver" @click="$emit('cancelled')">Cancel</button>
-          <button class="boxed primary" style="min-width: 120px;" @click="savePressed">Save</button>
+        <div v-if="this.mode === 'add' || this.mode === 'edit'" class="fixed padding-hor-xl padding-vert-m" style="z-index: 200; background-color: white; text-align: right; border-radius: 0 0 10px 10px; transition: all .4s;" :class="{shadowyTop: doesHaveScrollDown}">
+          <button class="boxed primary properGrey" style="margin-right: 4px;" @click="cancelPressed()">Cancel</button>
+          <button class="boxed primary properBlue" style="min-width: 120px;" @click="savePressed">Save</button>
         </div>
     </div>
   </div>
@@ -121,10 +121,29 @@ export default {
       month: {value: '', isValid: true, wasFocused: false},
       year: {value: '', isValid: true, wasFocused: false},
       //
-      shouldComeBackToManager: false
+      shouldComeBackToManager: false,
+      //
+      scrollable: null,
+      didScroll: false,
+      doesHaveScrollDown: false
     }
   },
   methods: {
+    checkScrollPosition () {
+      this.checkIfCanScroll()
+      if (this.scrollable.scrollTop > 10) {
+        this.didScroll = true
+      } else {
+        this.didScroll = false
+      }
+    },
+    checkIfCanScroll () {
+      if (this.scrollable.scrollHeight > this.scrollable.clientHeight && ((this.scrollable.scrollTop + 10) < (this.scrollable.scrollHeight - this.scrollable.clientHeight))) {
+        this.doesHaveScrollDown = true
+      } else {
+        this.doesHaveScrollDown = false
+      }
+    },
     savePressed () {
       let errors = this.checkForErrors()
       if (errors) {
@@ -142,11 +161,24 @@ export default {
         this.$emit('saveExisting', data)
       }
     },
+    cancelPressed () {
+      if (this.shouldComeBackToManager) {
+        this.$emit('backToManager')
+      } else {
+        this.$emit('cancelled')
+      }
+    },
     addPressed () {
+      setTimeout(() => {
+        this.checkIfCanScroll()
+      }, 100)
       this.shouldComeBackToManager = false
       this.$emit('add')
     },
     editSelectedPressed (index) {
+      setTimeout(() => {
+        this.checkIfCanScroll()
+      }, 100)
       this.shouldComeBackToManager = true
       this.$emit('edit', index)
       this.fillForm()
@@ -196,6 +228,10 @@ export default {
     if (this.mode === 'edit') {
       this.fillForm()
     }
+    setTimeout(() => {
+      this.scrollable = document.getElementById('watchMeScroll')
+      this.checkIfCanScroll()
+    }, 100)
   },
   watch: {
     selectedPayment () {
@@ -206,6 +242,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.shadowyBottom {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+.shadowyTop {
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.15); 
+}
+
+
+//
+button.boxed.properBlue {
+  background-color: #3a84e8;
+}
+
+button.boxed.properGrey {
+  background-color: #f1f1f1;
+  color: #6d6d6d;
+  font-weight: normal !important;
+}
+
+textarea, input[type=text], input[type=password], select {
+    min-width: 220px;
+}
+
+
+//
 .errorInputHighlight {
   border-color: tomato;
 }

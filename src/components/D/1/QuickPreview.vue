@@ -1,53 +1,54 @@
 <template>
 <transition name="modal">
   <div class="modal-mask" style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0,0,0,0.4)" @click="closePressed()">
-    <div class="modal-container" style="max-width: 800px; margin: 5vh auto; background-color: white; border-radius: 2px; box-shadow: 0px 12px 36px rgba(0,0,0,0.1);" @click.stop="doThis()">
-      <div class="flexy padding-vert-m padding-hor-l" style="height: 7vh; border-bottom: 1px solid #DDE1EB;">
-        <h2 style="font-size: 20px;">Quick Preview</h2>
+    <div class="modal-container flexy align-stretch" style="max-width: 720px; max-height: 100vh; flex-direction: column; margin: 0 auto; padding: 24px 0;" @click.stop="doThis()">
+      <div class="flexy padding-hor-xl fixed" style="background-color: white; border-radius: 10px 10px 0 0; padding-top: 24px; padding-bottom: 24px; z-index: 200; transition: all .4s;" :class="{shadowyBottom: didScroll}">
+        <div style="font-size: 24px; font-weight: 900;">Quick Preview</div>
         <div class="fixed" style="width: 16px;" @click="closePressed()">
           <button>
             <img src="./../../../assets/pui-icons-v-0-1/icn-close.png" class="button-icon" style="opacity: 1; padding-top: 4px;">
           </button>
         </div>
       </div>
-      <div style="max-height: 80vh; overflow: auto;">
-        <div class="flexy align-top padding-hor-l padding-vert-l">
-          <div class="fixed" style="width: 220px;">
+      <!--  -->
+      <div class="padding-hor-xl padding-vert-m roundBottom" style="overflow: scroll; background-color: white; padding-top: ; padding-bottom: 12px;"  id="watchMeScroll" @scroll="checkScrollPosition">
+        <div class="flexy align-top">
+          <div class="fixed" style="width:200px">
             <img :src="item.img" width="200px">
           </div>
-          <div class="padding-hor-l">
-            <div><h2>{{item.name}}</h2></div>
+          <div class="" style="padding-left: 24px;">
+            <div style="font-size: 19px; font-weight: 900;">{{item.name}}</div>
             <div>by {{item.by}}</div>
             <div class="padding-vert-s">
-              <div style="color: gold;">★★★★☆</div>
-              <div class="padding-vert-xs"></div>
-              <div class="padding-vert-xs padding-hor-m" style="background-color: pink; display: inline-block;">#1 Bestseller in Industrial Product Design</div>
+              <div style="color: #ff9900; font-size: 18px;">★★★★☆</div>
+              <div class="" style="font-size: 13px;">249 customer reviews</div>
+              <div class="" style="font-size: 13px;">#1 Bestseller in Industrial Product Design</div>
             </div>
-            <div class="padding-vert-s flexy">
-              <div class="fixed padding-hor-s padding-vert-s bordered rounded" style="width: 120px; cursor: pointer;" :class="{selected: selectedFormat === 'kindle'}" @click="selectedFormat = 'kindle'">
-                <div style="font-size: 14px; font-weight: bold;">Kindle book</div>
-                <div style="font-size: 14px; padding-top: 4px;">$17.63</div>
+            <div class="flexy" style="padding-top: 16px; width: 80%;">
+              <div class="fixed padding-hor-m padding-vert-s bordered rounded unselected" style="width: 32%; cursor: pointer;" :class="{selected: selectedFormat === 'kindle'}" @click="selectedFormat = 'kindle'">
+                <div class="bookType" style="font-size: 13px; ">Kindle book</div>
+                <div class="bookPrice" style="font-size: 14px; padding-top: 2px;">$17.63</div>
               </div>
-              <div class="fixed" style="width:16px;"></div>
-              <div class="fixed padding-hor-s padding-vert-s bordered rounded" style="width: 120px; cursor: pointer;" :class="{selected: selectedFormat === 'hardcover'}" @click="selectedFormat = 'hardcover'">
-                <div style="font-size: 14px; font-weight: bold;">Hardcover</div>
-                <div style="font-size: 14px; padding-top: 4px;">$18.89</div>
+              <div class="fixed" style="width:2%;"></div>
+              <div class="fixed padding-hor-m padding-vert-s bordered rounded unselected" style="width: 32%; cursor: pointer;" :class="{selected: selectedFormat === 'hardcover'}" @click="selectedFormat = 'hardcover'">
+                <div class="bookType" style="font-size: 13px; ">Hardcover</div>
+                <div class="bookPrice" style="font-size: 14px; padding-top: 2px;">$18.89</div>
               </div>
-              <div class="fixed" style="width:16px;"></div>
-              <div class="fixed padding-hor-s padding-vert-s bordered rounded" style="width: 120px; cursor: pointer;"  :class="{selected: selectedFormat === 'paperback'}" @click="selectedFormat = 'paperback'">
-                <div style="font-size: 14px; font-weight: bold;">Paperback</div>
-                <div style="font-size: 14px; padding-top: 4px;">$55.77</div>
+              <div class="fixed" style="width:2%;"></div>
+              <div class="fixed padding-hor-m padding-vert-s bordered rounded unselected" style="width: 32%; cursor: pointer;"  :class="{selected: selectedFormat === 'paperback'}" @click="selectedFormat = 'paperback'">
+                <div class="bookType" style="font-size: 13px; ">Paperback</div>
+                <div class="bookPrice" style="font-size: 14px; padding-top: 2px;">$55.77</div>
               </div>
             </div>
-            <div class="padding-vert-s">
-              <button class="boxed primary" @click="addPressed()" v-if="!isBeingAddedToCart">Add to cart</button>
-              <button class="boxed subtle-primary" style="background-color: #b3ffb3; color: green; cursor: auto;" v-if="isBeingAddedToCart">Added!</button>
+            <div class="" style="padding-top: 12px; width: 80%;">
+              <button class="boxed primary properBlue wide" @click="addPressed()" v-if="!isBeingAddedToCart">Add to cart</button>
+              <button class="boxed subtle-primary wide" style="background-color: #b3ffb3; color: green; cursor: auto;" v-if="isBeingAddedToCart">Added!</button>
             </div>
             <!-- <div>{{item.section}}</div>
             <div>{{item.index}}</div> -->
           </div>
         </div>
-        <div class="padding-vert-l padding-hor-l">
+        <div class="padding-vert-l">
           <div class="flexy rounded">
             <div class="fixed padding-vert-s" :class="{selectedTab: selectedTab === 'description'}" @click="selectedTab = 'description'" style="width: 140px; text-align: center; font-size: 14px; cursor: pointer; border: 1px solid #E6EBF5; border-right: none; border-top-left-radius: 6px; border-bottom-left-radius: 6px;">
               Description
@@ -121,13 +122,23 @@ export default {
       showFullDescription: false,
       selectedFormat: 'kindle',
       selectedTab: 'description',
-      isBeingAddedToCart: false
+      isBeingAddedToCart: false,
+      //
+      scrollable: null,
+      didScroll: false
     }
   },
   props: [
     'selectedForPreview'
   ],
   methods: {
+    checkScrollPosition () {
+      if (this.scrollable.scrollTop > 10) {
+        this.didScroll = true
+      } else {
+        this.didScroll = false
+      }
+    },
     closePressed () {
       this.$emit('close')
     },
@@ -143,14 +154,48 @@ export default {
   },
   created () {
     this.item = this.selectedForPreview
+    setTimeout(() => {
+      this.scrollable = document.getElementById('watchMeScroll')
+    }, 100)
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.shadowyBottom {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+//
+button.boxed.properBlue {
+  background-color: #3a84e8;
+}
+
+//
+
+.roundBottom {
+  border-radius: 0 0 10px 10px;
+}
+
+.unselected {
+  // opacity: 0.6;
+  & .bookPrice {
+    color: grey;
+  }
+}
+
 .selected {
-  border: 1px solid gold !important;
-  background-color: gold;
+  border: 1px solid #ffb647 !important;
+  opacity: 1 !important;
+
+  & .bookType {
+    font-weight: 900;
+  }
+
+  & .bookPrice {
+    color: black;
+  }
+  // background-color: gold;
   // background-color: #fff4bb;
 }
 
