@@ -6,27 +6,27 @@
     <div style="font-size: 19px; font-weight: 900;">Order summary</div>
     <div class="flexy" style="padding-top: 24px;">
       <div>Items</div>
-      <div class="fixed text-right" style="width:56px;">$89.98</div>
+      <div class="fixed text-right" style="width:56px;">${{cartSum}}</div>
     </div>
     <div class="flexy" style="padding-top: 6px;">
       <div>Shipping & handling</div>
-      <div class="fixed text-right" style="width:56px;">$6.98</div>
+      <div class="fixed text-right" style="width:56px;">${{deliveryPrice === 0 ? '6.98' : deliveryPrice}}</div>
     </div>
-    <div class="flexy" style="padding-top: 6px;">
+    <div class="flexy" style="padding-top: 6px;" v-if="deliveryPrice === 0">
       <div>Free shipping</div>
       <div class="fixed text-right" style="width:56px;">-$6.98</div>
     </div>
     <div class="flexy" style="padding-top: 24px;">
       <div>Total before tax</div>
-      <div class="fixed text-right" style="width:56px;">$89.98</div>
+      <div class="fixed text-right" style="width:56px;">${{beforeTax}}</div>
     </div>
     <div class="flexy" style="padding-top: 6px;">
       <div>Estimated tax</div>
-      <div class="fixed text-right" style="width:56px;">$6.87</div>
+      <div class="fixed text-right" style="width:56px;">${{tax}}</div>
     </div>
     <div class="flexy" style="padding-top: 24px; font-weight: 900;">
       <div>Order total</div>
-      <div class="fixed text-right" style="width:56px;">$96.85</div>
+      <div class="fixed text-right" style="width:56px;">${{total}}</div>
     </div>
     <div class="padding-vert-s"></div>
     <button class="boxed primary wide properBlue" :class="{properGrey: !canPlaceOrder}" @click="placeOrder()">Place order</button>
@@ -66,11 +66,51 @@ export default {
   },
   props: [
     'selectedAddress',
-    'selectedPayment'
+    'selectedPayment',
+    'cart',
+    'delivery'
   ],
   computed: {
     canPlaceOrder () {
       return this.selectedAddress !== null && this.selectedPayment !== null
+    },
+    cartSum () {
+      let sum = 0
+      for (let i in this.cart) {
+        sum += this.cart[i].price * this.cart[i].quantity
+      }
+      return sum.toFixed(2)
+    },
+    deliveryPrice () {
+      switch (this.delivery) {
+        case '0':
+          return 0
+        case '1':
+          return 0
+        case '2':
+          return 6.98
+        case '3':
+          return 13.98
+        case '4':
+          return 20.98
+        default:
+          break
+      }
+    },
+    beforeTax () {
+      let beforeTaxTemp = 0
+      beforeTaxTemp = parseInt(this.cartSum) + this.deliveryPrice
+      return beforeTaxTemp.toFixed(2)
+    },
+    tax () {
+      let taxTemp = 0
+      taxTemp = parseInt(this.beforeTax) * 0.18
+      return taxTemp.toFixed(2)
+    },
+    total () {
+      let totalTemp = 0
+      totalTemp = parseInt(this.beforeTax) + parseInt(this.tax)
+      return totalTemp.toFixed(2)
     }
   },
   methods: {
@@ -92,7 +132,9 @@ button.boxed.properBlue {
 }
 
 button.boxed.properGrey {
-  background-color: #cdd7e4;
+  background-color: rgba(0,0,0,0.08);
+  color: #818181;
+  font-weight: normal;
 }
 
 .cart-appear-enter-active, .cart-appear-leave-active {

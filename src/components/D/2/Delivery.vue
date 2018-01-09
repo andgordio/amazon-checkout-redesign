@@ -8,23 +8,23 @@
       <div style="font-size: 19px; font-weight: 900;">Delivery</div>
       <div style="padding-top: 12px;">
         <div class="flexy align-top"  style="padding-bottom: 14px;">
-          <input type="radio" id="deliveryChoice1" value="1" v-model="chosenDelivery" class="fixed" style="width: 24px;">
+          <input type="radio" id="deliveryChoice1" value="0" v-model="delivery" class="fixed" style="width: 24px;">
           <label for="deliveryChoice1"><div>Thursday, Nov 2</div><div class="text-grey" style="padding-top: 3px; font-size: 14px;">Free Two-Day shipping with a free trial of Amazon Prime</div></label>
         </div>
         <div class="flexy align-top" style="padding-bottom: 14px;">
-          <input type="radio" id="deliveryChoice2" value="2" v-model="chosenDelivery" class="fixed" style="width: 24px;">
+          <input type="radio" id="deliveryChoice2" value="1" v-model="delivery" class="fixed" style="width: 24px;">
           <label for="deliveryChoice2"><div>Nov 6—10</div><div class="text-grey" style="padding-top: 3px; font-size: 14px;">FREE shipping</div></label>
         </div>
         <div class="flexy align-top" style="padding-bottom: 14px;">
-          <input type="radio" id="deliveryChoice3" value="3" v-model="chosenDelivery" class="fixed" style="width: 24px;">
+          <input type="radio" id="deliveryChoice3" value="2" v-model="delivery" class="fixed" style="width: 24px;">
           <label for="deliveryChoice3"><div>Monday, Nov 6</div><div class="text-grey" style="padding-top: 3px; font-size: 14px;">$6.98 - Standart shipping</div></label>
         </div>
         <div class="flexy align-top" style="padding-bottom: 14px;">
-          <input type="radio" id="deliveryChoice4" value="4" v-model="chosenDelivery" class="fixed" style="width: 24px;">
+          <input type="radio" id="deliveryChoice4" value="3" v-model="delivery" class="fixed" style="width: 24px;">
           <label for="deliveryChoice4"><div>Thursday, Nov 2</div><div class="text-grey" style="padding-top: 3px; font-size: 14px;">$13.98 - Two-Day Shipping</div></label>
         </div>
         <div class="flexy align-top" style="padding-bottom: 14px;">
-          <input type="radio" id="deliveryChoice5" value="5" v-model="chosenDelivery" class="fixed" style="width: 24px;">
+          <input type="radio" id="deliveryChoice5" value="4" v-model="delivery" class="fixed" style="width: 24px;">
           <label for="deliveryChoice5"><div>Wednesday, Nov 1</div><div class="text-grey" style="padding-top: 3px; font-size: 14px;">$20.98 - One-Day Shipping</div></label>
         </div>
       </div>
@@ -42,6 +42,19 @@ export default {
   ],
   data () {
     return {
+    }
+  },
+  computed: {
+    delivery: {
+      // getter
+      get: function () {
+        return this.chosenDelivery
+      },
+      // setter
+      set: function (newValue) {
+        console.log(newValue)
+        this.$emit('deliveryChosen', newValue)
+      }
     }
   }
 }

@@ -127,6 +127,8 @@
         <div class="flexy align-stretch" style="flex-direction: row-reverse;">
           <!--SUMMARY--><OrderSummary   :selectedAddress="selectedAddress"
                                         :selectedPayment="selectedPayment"
+                                        :cart="cart"
+                                        :delivery="chosenDelivery"
                                         @placed="currentView = 'ExtraSignup'"/>
           <div class="padding-vert-l">
             <div class="flexy align-stretch" style="">
@@ -154,9 +156,10 @@
               <ShoppingCartMin  :cart="cart"
                                 @edit="currentView = 'ShoppingCart'"/>
               <!--DELIVERY MIN-->
-              <Delivery         :chosenDelivery="chosenDelivery"/>
+              <Delivery         :chosenDelivery="chosenDelivery"
+                                @deliveryChosen="changeDelivery($event)"/>
             </div>
-            
+            <!-- <div>{{chosenDelivery}}</div> -->
           </div>
           <!-- SIGN IN -->
           <SignIn v-if="doShowSignIn" @close="signInClosed()" @login="loginPressed"/>
@@ -196,7 +199,7 @@ export default {
   data () {
     return {
       currentView: 'Start',
-      chosenDelivery: '1',
+      chosenDelivery: '0',
       reactivator: 0,
       //
       addressMode: null,
@@ -492,6 +495,11 @@ export default {
       this.selectedAddress = 0
       this.selectedPayment = 0
       this.doShowSignIn = false
+    },
+    // DELIVERY
+    changeDelivery (index) {
+      console.log(index)
+      this.chosenDelivery = index
     }
   },
   created () {
