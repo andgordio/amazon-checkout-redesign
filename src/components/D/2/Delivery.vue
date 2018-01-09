@@ -52,7 +52,6 @@ export default {
       },
       // setter
       set: function (newValue) {
-        console.log(newValue)
         this.$emit('deliveryChosen', newValue)
       }
     }

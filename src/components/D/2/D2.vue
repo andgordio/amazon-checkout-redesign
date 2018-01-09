@@ -498,7 +498,6 @@ export default {
     },
     // DELIVERY
     changeDelivery (index) {
-      console.log(index)
       this.chosenDelivery = index
     }
   },
