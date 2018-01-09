@@ -5,72 +5,108 @@
       <!--
         LEFT COLUMN
       -->
-      <div>
-        <!-- CART -->
-        <div class="padding-vert-l padding-hor-xl" style="">
-          <div style="">
-            <div style="font-size: 19px; font-weight: 900;">Shopping Cart</div>
-          </div>
-          <transition-group name="list-ani" tag="div" style="">
-            <div class="list-ani-item large" style="padding-top: 16px;" v-for="(item, i) in items" :key="item.name">
-              <div class="flexy align-top">
-                <div class="fixed overlay-wrapper">
-                  <div class="overlay-image"><img :src="item.img" width="64px"></div>
-                  <div class="overlay-content" @click="openPreview('items', i)" style="cursor: pointer; text-align:center;">
-                    <!-- <button style="padding: 40px 12px; color: white;">preview</button> -->
-                    <img src="./../../../assets/icn-preview.png" style="width: 40px; padding: 28px 0 0; border-radius: 6px;">
-                  </div>
-                </div>
-                <div style="padding: 0 24px 0 12px;">
-                  <div style="padding-top: 6px;">{{item.name}}</div>
-                  <div class="text-grey" style="padding-top: 4px; font-size: 14px;">by {{item.by}}</div>
-                  <!-- <div class="padding-vert-xs">$ {{item.price}}</div> -->
-                  <div class="text-grey" style="padding-top: 2px; font-size: 14px;">{{item.availability}}, {{item.seller}}</div>
-                </div>
-                <div class="fixed" style="width: 91px; padding-top: 6px;">${{item.price}}</div>
-                <div class="fixed" style="width: 72px;">
-                  <select v-model="item.quantity" style="min-width: auto; width: 56px; background-color: rgba(255,255,255,0.6); padding: 4px 8px;" name="quantity" id="item-quantity">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                  </select>
-                </div>
-                <div class="fixed" style="width: 24px; padding-top: 2px;">
-                  <button @click="xPressed(i)" v-if="!item.isXPressed">
-                    <img src="./../../../assets/pui-icons-v-0-1/icn-close-thin.png" class="button-icon" style="opacity:1;">
-                  </button>
-                  <div v-if="item.isXPressed">
-                    <div @click="xPressed(i)" style="position: absolute; z-index: 90; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0,0,0,0.2)"></div>
-                    <div class="padding-vert-xs padding-hor-xs rounded" style="position: relative; width: 160px; transform: translate(-130px, -12px); z-index: 120; background-color: white; box-shadow: 0px 4px 12px rgba(0,0,0,0.0.5);">
-                      <button class="overlay-button" style="display: block; width: 100%; text-align: left; padding: 8px 12px; color: #409EFF; margin: 0;" @click="saveForLaterPressed(i)">Save for later</button>
-                      <button class="overlay-button" style="display: block; width: 100%; text-align: left; padding: 8px 12px; color: #fd3737; margin: 0;" @click="removeItemPressed(i)">Remove from cart</button>
-                      <button class="overlay-button" style="display: block; width: 100%; text-align: left; padding: 8px 12px; color: silver; margin: 0;" @click="xPressed(i)">Cancel</button>
+      
+        <div>
+          <!-- CART -->
+          <transition name="cart-appear" appear>
+            <div class="padding-vert-l padding-hor-xl" style="">
+              <div style="">
+                <div style="font-size: 19px; font-weight: 900;">Shopping Cart</div>
+              </div>
+              <transition-group name="list-ani" tag="div" style="">
+                <div class="list-ani-item large" style="padding-top: 16px;" v-for="(item, i) in items" :key="item.name">
+                  <div class="flexy align-top">
+                    <div class="fixed overlay-wrapper">
+                      <div class="overlay-image"><img :src="item.img" width="64px"></div>
+                      <div class="overlay-content" @click="openPreview('items', i)" style="cursor: pointer; text-align:center;">
+                        <!-- <button style="padding: 40px 12px; color: white;">preview</button> -->
+                        <img src="./../../../assets/icn-preview.png" style="width: 40px; padding: 28px 0 0; border-radius: 6px;">
+                      </div>
+                    </div>
+                    <div style="padding: 0 24px 0 12px;">
+                      <div style="padding-top: 6px;">{{item.name}}</div>
+                      <div class="text-grey" style="padding-top: 4px; font-size: 14px;">by {{item.by}}</div>
+                      <!-- <div class="padding-vert-xs">$ {{item.price}}</div> -->
+                      <div class="text-grey" style="padding-top: 2px; font-size: 14px;">{{item.availability}}, {{item.seller}}</div>
+                    </div>
+                    <div class="fixed" style="width: 91px; padding-top: 6px;">${{item.price}}</div>
+                    <div class="fixed" style="width: 72px;">
+                      <select v-model="item.quantity" style="min-width: auto; width: 56px; background-color: rgba(255,255,255,0.6); padding: 4px 8px;" name="quantity" id="item-quantity">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                      </select>
+                    </div>
+                    <div class="fixed" style="width: 24px; padding-top: 2px;">
+                      <button @click="xPressed(i)" v-if="!item.isXPressed">
+                        <img src="./../../../assets/pui-icons-v-0-1/icn-close-thin.png" class="button-icon" style="opacity:1;">
+                      </button>
+                      <div v-if="item.isXPressed">
+                        <div @click="xPressed(i)" style="position: absolute; z-index: 90; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0,0,0,0.2)"></div>
+                        <div class="padding-vert-xs padding-hor-xs rounded" style="position: relative; width: 160px; transform: translate(-136px, -16px); z-index: 120; background-color: white; box-shadow: 0px 4px 12px rgba(0,0,0,0.0.5);">
+                          <button class="overlay-button" style="display: block; width: 100%; text-align: left; padding: 7px 12px; color: #409EFF; margin: 0;" @click="saveForLaterPressed(i)">Save for later</button>
+                          <button class="overlay-button" style="display: block; width: 100%; text-align: left; padding: 7px 12px; color: #fd3737; margin: 0;" @click="removeItemPressed(i)">Remove from cart</button>
+                          <button class="overlay-button" style="display: block; width: 100%; text-align: left; padding: 7px 12px; color: silver; margin: 0;" @click="xPressed(i)">Cancel</button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
+              </transition-group>
+              <div class="padding-vert-m" style="font-size: 12px; color: #878D98;">
+                <div style="padding-top: 12px;">The price and availability of items at Amazon.com are subject to change. The Cart is a temporary place to store a list of your items and reflects each item's most recent price. Shopping Cart <span style="color: #878D98; border-bottom: 1px dashed; cursor: pointer;">Learn more</span></div>
+                <div style="padding-top: 12px;">Do you have a gift card or promotional code? We'll ask you to enter your claim code when it's time to pay.</div>
               </div>
             </div>
-          </transition-group>
-          <div class="padding-vert-m" style="font-size: 12px; color: #878D98;">
-            <div style="padding-top: 12px;">The price and availability of items at Amazon.com are subject to change. The Cart is a temporary place to store a list of your items and reflects each item's most recent price. Shopping Cart <span style="color: #878D98; border-bottom: 1px dashed; cursor: pointer;">Learn more</span></div>
-            <div style="padding-top: 12px;">Do you have a gift card or promotional code? We'll ask you to enter your claim code when it's time to pay.</div>
-          </div>
-        </div>
-        <!-- SAVED FOR LATER -->
-        <div v-if="later.length > 0">
+          </transition>
+          <!-- SAVED FOR LATER -->
+          <transition name="left-column-appear" appear>
+            <div v-if="later.length > 0">
+              <div class="padding-hor-xl" style="padding-top: 12px;">
+                <div style="">
+                  <div style="font-size: 19px; font-weight: 900;">You saved for later</div>
+                </div>
+                <div style="padding-top: 24px;">
+                  <transition-group name="list-ani" tag="div" class="flexy" style="flex-wrap: wrap;">
+                    <div class="list-ani-item higher" style="width: 50%; padding-right: 32px;" v-for="(item, i) in later" :key="item.name">
+                      <div class="flexy align-top">
+                        <div class="fixed overlay-wrapper">
+                          <div class="overlay-image"><img :src="item.img" width="64"></div>
+                            <div class="overlay-content" @click="openPreview('later', i)" style="cursor: pointer; text-align: center;">
+                              <img src="./../../../assets/icn-preview.png" style="width: 40px; padding: 28px 0 0; border-radius: 6px;">
+                            </div>
+                        </div>
+                        <div style="padding: 0 0 0 12px;">
+                          <div style="max-height: 34px; overflow: hidden;">{{item.name}}</div>
+                          <div class="text-grey" style="padding-top: 4px; font-size: 14px;">by {{item.by}}</div>
+                          <div class="text-grey" style="padding-top: 2px; font-size: 14px;">${{item.price}}</div>
+                          <div style="padding-top: 6px;">
+                            <button style="font-size: 13px; min-width: 88px; padding: 3px 0; color:#3a84e8; border: 1px solid; border-radius: 4px;" @click="addFromLaterPressed(i)" v-if="!item.isBeingAddedToCart">Add to cart</button>
+                            <button class="" style="color: #28B87B; font-size: 13px; min-width: 88px; padding: 3px 0; border: 1px solid; border-radius: 4px; cursor: auto;" v-if="item.isBeingAddedToCart">Added!</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </transition-group>
+                </div>
+              </div>
+            </div>
+          </transition>
+          <!-- RECENT -->
+          <transition name="left-column-appear" appear>
           <div class="padding-hor-xl" style="padding-top: 12px;">
             <div style="">
-              <div style="font-size: 19px; font-weight: 900;">You saved for later</div>
+              <div style="font-size: 19px; font-weight: 900;">{{youRecentlyViewed}}</div>
             </div>
             <div style="padding-top: 24px;">
               <transition-group name="list-ani" tag="div" class="flexy" style="flex-wrap: wrap;">
-                <div class="list-ani-item higher" style="width: 50%; padding-right: 32px;" v-for="(item, i) in later" :key="item.name">
+                <div class="list-ani-item higher" style="width: 50%; padding-right: 32px;" v-for="(item, i) in recent" :key="item.name">
                   <div class="flexy align-top">
                     <div class="fixed overlay-wrapper">
                       <div class="overlay-image"><img :src="item.img" width="64"></div>
-                        <div class="overlay-content" @click="openPreview('later', i)" style="cursor: pointer; text-align: center;">
+                        <div class="overlay-content" @click="openPreview('recent', i)" style="cursor: pointer; text-align: center;">
                           <img src="./../../../assets/icn-preview.png" style="width: 40px; padding: 28px 0 0; border-radius: 6px;">
                         </div>
                     </div>
@@ -79,7 +115,7 @@
                       <div class="text-grey" style="padding-top: 4px; font-size: 14px;">by {{item.by}}</div>
                       <div class="text-grey" style="padding-top: 2px; font-size: 14px;">${{item.price}}</div>
                       <div style="padding-top: 6px;">
-                        <button style="font-size: 13px; min-width: 88px; padding: 3px 0; color:#3a84e8; border: 1px solid; border-radius: 4px;" @click="addFromLaterPressed(i)" v-if="!item.isBeingAddedToCart">Add to cart</button>
+                        <button style="font-size: 13px; min-width: 88px; padding: 3px 0; color:#3a84e8; border: 1px solid; border-radius: 4px;" @click="addFromRecentPressed(i)" v-if="!item.isBeingAddedToCart">Add to cart</button>
                         <button class="" style="color: #28B87B; font-size: 13px; min-width: 88px; padding: 3px 0; border: 1px solid; border-radius: 4px; cursor: auto;" v-if="item.isBeingAddedToCart">Added!</button>
                       </div>
                     </div>
@@ -88,79 +124,56 @@
               </transition-group>
             </div>
           </div>
-        </div>
-        <!-- RECENT -->
-        <div class="padding-hor-xl" style="padding-top: 12px;">
-          <div style="">
-            <div style="font-size: 19px; font-weight: 900;">{{youRecentlyViewed}}</div>
-          </div>
-          <div style="padding-top: 24px;">
-            <transition-group name="list-ani" tag="div" class="flexy" style="flex-wrap: wrap;">
-              <div class="list-ani-item higher" style="width: 50%; padding-right: 32px;" v-for="(item, i) in recent" :key="item.name">
-                <div class="flexy align-top">
-                  <div class="fixed overlay-wrapper">
-                    <div class="overlay-image"><img :src="item.img" width="64"></div>
-                      <div class="overlay-content" @click="openPreview('recent', i)" style="cursor: pointer; text-align: center;">
-                        <img src="./../../../assets/icn-preview.png" style="width: 40px; padding: 28px 0 0; border-radius: 6px;">
+          </transition>
+          <!-- ALSO -->
+          <transition name="left-column-appear" appear>
+          <div class="padding-hor-xl" style="padding-top: 12px;">
+            <div style="">
+              <div style="font-size: 19px; font-weight: 900;">Customers also bought</div>
+            </div>
+            <div style="padding-top: 24px;">
+              <transition-group name="list-ani" tag="div" class="flexy" style="flex-wrap: wrap;">
+                <div class="list-ani-item higher" style="width: 50%; padding-right: 32px;" v-for="(item, i) in also" :key="item.name">
+                  <div class="flexy align-top">
+                    <div class="fixed overlay-wrapper">
+                      <div class="overlay-image"><img :src="item.img" width="64"></div>
+                        <div class="overlay-content" @click="openPreview('also', i)" style="cursor: pointer; text-align: center;">
+                          <img src="./../../../assets/icn-preview.png" style="width: 40px; padding: 28px 0 0; border-radius: 6px;">
+                        </div>
+                    </div>
+                    <div style="padding: 0 0 0 12px;">
+                      <div style="max-height: 34px; overflow: hidden;">{{item.name}}</div>
+                      <div class="text-grey" style="padding-top: 4px; font-size: 14px;">by {{item.by}}</div>
+                      <div class="text-grey" style="padding-top: 2px; font-size: 14px;">${{item.price}}</div>
+                      <div style="padding-top: 6px;">
+                        <button style="font-size: 13px; min-width: 88px; padding: 3px 0; color:#3a84e8; border: 1px solid; border-radius: 4px;" @click="addFromAlsoPressed(i)" v-if="!item.isBeingAddedToCart">Add to cart</button>
+                        <button class="" style="color: #28B87B; font-size: 13px; min-width: 88px; padding: 3px 0; border: 1px solid; border-radius: 4px; cursor: auto;" v-if="item.isBeingAddedToCart">Added!</button>
                       </div>
-                  </div>
-                  <div style="padding: 0 0 0 12px;">
-                    <div style="max-height: 34px; overflow: hidden;">{{item.name}}</div>
-                    <div class="text-grey" style="padding-top: 4px; font-size: 14px;">by {{item.by}}</div>
-                    <div class="text-grey" style="padding-top: 2px; font-size: 14px;">${{item.price}}</div>
-                    <div style="padding-top: 6px;">
-                      <button style="font-size: 13px; min-width: 88px; padding: 3px 0; color:#3a84e8; border: 1px solid; border-radius: 4px;" @click="addFromRecentPressed(i)" v-if="!item.isBeingAddedToCart">Add to cart</button>
-                      <button class="" style="color: #28B87B; font-size: 13px; min-width: 88px; padding: 3px 0; border: 1px solid; border-radius: 4px; cursor: auto;" v-if="item.isBeingAddedToCart">Added!</button>
                     </div>
                   </div>
                 </div>
-              </div>
-            </transition-group>
+              </transition-group>
+            </div>
           </div>
+          </transition>
         </div>
-        <!-- ALSO -->
-        <div class="padding-hor-xl" style="padding-top: 12px;">
-          <div style="">
-            <div style="font-size: 19px; font-weight: 900;">Customers also bought</div>
-          </div>
-          <div style="padding-top: 24px;">
-            <transition-group name="list-ani" tag="div" class="flexy" style="flex-wrap: wrap;">
-              <div class="list-ani-item higher" style="width: 50%; padding-right: 32px;" v-for="(item, i) in also" :key="item.name">
-                <div class="flexy align-top">
-                  <div class="fixed overlay-wrapper">
-                    <div class="overlay-image"><img :src="item.img" width="64"></div>
-                      <div class="overlay-content" @click="openPreview('also', i)" style="cursor: pointer; text-align: center;">
-                        <img src="./../../../assets/icn-preview.png" style="width: 40px; padding: 28px 0 0; border-radius: 6px;">
-                      </div>
-                  </div>
-                  <div style="padding: 0 0 0 12px;">
-                    <div style="max-height: 34px; overflow: hidden;">{{item.name}}</div>
-                    <div class="text-grey" style="padding-top: 4px; font-size: 14px;">by {{item.by}}</div>
-                    <div class="text-grey" style="padding-top: 2px; font-size: 14px;">${{item.price}}</div>
-                    <div style="padding-top: 6px;">
-                      <button style="font-size: 13px; min-width: 88px; padding: 3px 0; color:#3a84e8; border: 1px solid; border-radius: 4px;" @click="addFromAlsoPressed(i)" v-if="!item.isBeingAddedToCart">Add to cart</button>
-                      <button class="" style="color: #28B87B; font-size: 13px; min-width: 88px; padding: 3px 0; border: 1px solid; border-radius: 4px; cursor: auto;" v-if="item.isBeingAddedToCart">Added!</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </transition-group>
-          </div>
-        </div>
-      </div>
       <!-- 
         RIGHT COLUMN
       -->
       <div class="fixed padding-hor-xl padding-vert-m" style="width: 32%; background-color: #F5F5F5; min-height: 100vh; position: sticky; top: 0;">
         <div class="padding-hor-m">
           <!-- SUMMARY -->
-          <div style="font-size: 19px; font-weight: 900; padding-top: 8px;">Subtotal</div>
-          <div style="padding-top: 16px; font-weight: 900;">{{cart.length}} item<span v-if="cart.length > 1">s</span>, {{subtotal}} </div>
-          <div class="flexy align-top" style="padding-top: 8px;">
-            <input type="checkbox" id="gift" class="fixed" style="width: 16px; text-align: left;">
-            <label for="gift"><div>This order contains a gift</div></label>
+          <transition name="cart-appear" appear>
+            <div>
+              <div style="font-size: 19px; font-weight: 900; padding-top: 8px;">Subtotal</div>
+              <div style="padding-top: 16px; font-weight: 900;">{{cart.length}} item<span v-if="cart.length > 1">s</span>, {{subtotal}} </div>
+              <div class="flexy align-top" style="padding-top: 8px;">
+                <input type="checkbox" id="gift" class="fixed" style="width: 16px; text-align: left;">
+                <label for="gift"><div>This order contains a gift</div></label>
+              </div>
+              <div style="padding-top: 24px;"><button class="boxed primary wide properBlue" style="background-color: #3a84e8;" @click="checkoutPressed()">Proceed to Checkout</button></div>
           </div>
-          <div style="padding-top: 24px;"><button class="boxed primary wide properBlue" style="background-color: #3a84e8;" @click="checkoutPressed()">Proceed to Checkout</button></div>
+          </transition>
           <!-- PRIME AD -->
           <transition name="right-column-appear" appear>
             <div class="" style="padding-top: 40px;">
@@ -439,7 +452,7 @@ export default {
 }
 .cart-appear-enter, .cart-appear-leave-to {
   opacity: 0;
-  transform: translateY(20px);
+  // transform: translateY(10px);
 }
 
 .left-column-appear-enter-active, .left-column-appear-leave-active {
@@ -447,7 +460,7 @@ export default {
 }
 .left-column-appear-enter, .left-column-appear-leave-to {
   opacity: 0;
-  // transform: translateY(20px);
+  transform: translateY(10px);
 }
 
 .right-column-appear-enter-active, .right-column-appear-leave-active {
@@ -455,7 +468,7 @@ export default {
 }
 .right-column-appear-enter, .right-column-appear-leave-to {
   opacity: 0;
-  // transform: translateY(20px);
+  transform: translateY(10px);
 }
 
 </style>
