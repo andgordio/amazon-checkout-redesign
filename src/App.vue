@@ -32,10 +32,10 @@ export default {
               //   name: '2b',
               //   description: 'Instance manager: quick menu only'
               // },
-              // {
-              //   name: '2a',
-              //   description: 'Instance manager: quick selection + manager'
-              // },
+              {
+                name: '2',
+                description: 'Order summary logic, back navigation'
+              },
               {
                 name: '1',
                 description: 'Layout and style'
