@@ -13,7 +13,7 @@
               <div style="">
                 <div style="font-size: 19px; font-weight: 900;">Shopping Cart</div>
               </div>
-              <transition-group name="list-ani" tag="div" style="">
+              <transition-group name="cart-list-ani" tag="div" style="">
                 <div class="list-ani-item large" style="padding-top: 16px;" v-for="(item, i) in items" :key="item.name">
                   <div class="flexy align-top">
                     <div class="fixed overlay-wrapper">
@@ -70,7 +70,7 @@
                 </div>
                 <div style="padding-top: 24px;">
                   <transition-group name="list-ani" tag="div" class="flexy" style="flex-wrap: wrap;">
-                    <div class="list-ani-item higher" style="width: 50%; padding-right: 32px;" v-for="(item, i) in later" :key="item.name">
+                    <div class="list-ani-item higher fixed" style="width: 50%; padding-right: 32px;" v-for="(item, i) in later" :key="item.name">
                       <div class="flexy align-top">
                         <div class="fixed overlay-wrapper">
                           <div class="overlay-image"><img :src="item.img" width="64"></div>
@@ -80,8 +80,8 @@
                         </div>
                         <div style="padding: 0 0 0 12px;">
                           <div style="max-height: 34px; overflow: hidden;">{{item.name}}</div>
-                          <div class="text-grey" style="padding-top: 4px; font-size: 14px;">by {{item.by}}</div>
-                          <div class="text-grey" style="padding-top: 2px; font-size: 14px;">${{item.price}}</div>
+                          <!-- <div class="text-grey" style="padding-top: 4px; font-size: 14px;">by {{item.by}}</div> -->
+                          <div class="text-grey" style="padding-top: 4px; font-size: 14px;">${{item.price}}</div>
                           <div style="padding-top: 6px;">
                             <button style="font-size: 13px; min-width: 88px; padding: 3px 0; color:#3a84e8; border: 1px solid; border-radius: 4px;" @click="addFromLaterPressed(i)" v-if="!item.isBeingAddedToCart">Add to cart</button>
                             <button class="" style="color: #28B87B; font-size: 13px; min-width: 88px; padding: 3px 0; border: 1px solid; border-radius: 4px; cursor: auto;" v-if="item.isBeingAddedToCart">Added!</button>
@@ -102,7 +102,7 @@
             </div>
             <div style="padding-top: 24px;">
               <transition-group name="list-ani" tag="div" class="flexy" style="flex-wrap: wrap;">
-                <div class="list-ani-item higher" style="width: 50%; padding-right: 32px;" v-for="(item, i) in recent" :key="item.name">
+                <div class="list-ani-item higher fixed" style="width: 50%; padding-right: 32px;" v-for="(item, i) in recent" :key="item.name">
                   <div class="flexy align-top">
                     <div class="fixed overlay-wrapper">
                       <div class="overlay-image"><img :src="item.img" width="64"></div>
@@ -112,8 +112,8 @@
                     </div>
                     <div style="padding: 0 0 0 12px;">
                       <div style="max-height: 34px; overflow: hidden;">{{item.name}}</div>
-                      <div class="text-grey" style="padding-top: 4px; font-size: 14px;">by {{item.by}}</div>
-                      <div class="text-grey" style="padding-top: 2px; font-size: 14px;">${{item.price}}</div>
+                      <!-- <div class="text-grey" style="padding-top: 4px; font-size: 14px;">by {{item.by}}</div> -->
+                      <div class="text-grey" style="padding-top: 4px; font-size: 14px;">${{item.price}}</div>
                       <div style="padding-top: 6px;">
                         <button style="font-size: 13px; min-width: 88px; padding: 3px 0; color:#3a84e8; border: 1px solid; border-radius: 4px;" @click="addFromRecentPressed(i)" v-if="!item.isBeingAddedToCart">Add to cart</button>
                         <button class="" style="color: #28B87B; font-size: 13px; min-width: 88px; padding: 3px 0; border: 1px solid; border-radius: 4px; cursor: auto;" v-if="item.isBeingAddedToCart">Added!</button>
@@ -133,18 +133,18 @@
             </div>
             <div style="padding-top: 24px;">
               <transition-group name="list-ani" tag="div" class="flexy" style="flex-wrap: wrap;">
-                <div class="list-ani-item higher" style="width: 50%; padding-right: 32px;" v-for="(item, i) in also" :key="item.name">
+                <div class="list-ani-item higher fixed" style="width: 50%; padding-right: 32px;" v-for="(item, i) in also" :key="item.name">
                   <div class="flexy align-top">
                     <div class="fixed overlay-wrapper">
                       <div class="overlay-image"><img :src="item.img" width="64"></div>
                         <div class="overlay-content" @click="openPreview('also', i)" style="cursor: pointer; text-align: center;">
-                          <img src="./../../../assets/icn-preview.png" style="width: 40px; padding: 28px 0 0; border-radius: 6px;">
+                          <!-- <img src="./../../../assets/icn-preview.png" style="width: 40px; padding: 28px 0 0; border-radius: 6px;"> -->
                         </div>
                     </div>
                     <div style="padding: 0 0 0 12px;">
                       <div style="max-height: 34px; overflow: hidden;">{{item.name}}</div>
-                      <div class="text-grey" style="padding-top: 4px; font-size: 14px;">by {{item.by}}</div>
-                      <div class="text-grey" style="padding-top: 2px; font-size: 14px;">${{item.price}}</div>
+                      <!-- <div class="text-grey" style="padding-top: 4px; font-size: 14px;">by {{item.by}}</div> -->
+                      <div class="text-grey" style="padding-top: 4px; font-size: 14px;">${{item.price}}</div>
                       <div style="padding-top: 6px;">
                         <button style="font-size: 13px; min-width: 88px; padding: 3px 0; color:#3a84e8; border: 1px solid; border-radius: 4px;" @click="addFromAlsoPressed(i)" v-if="!item.isBeingAddedToCart">Add to cart</button>
                         <button class="" style="color: #28B87B; font-size: 13px; min-width: 88px; padding: 3px 0; border: 1px solid; border-radius: 4px; cursor: auto;" v-if="item.isBeingAddedToCart">Added!</button>
@@ -199,13 +199,13 @@ export default {
   components: {
     QuickPreview
   },
-  props: [
-    'cart',
-    'alsoItems',
-    'recentItems',
-    'extraItems',
-    'laterItems'
-  ],
+  // props: [
+    // 'cart',
+    // 'alsoItems',
+    // 'recentItems',
+    // 'extraItems',
+    // 'laterItems'
+  // ],
   data () {
     return {
       items: [],
@@ -219,6 +219,21 @@ export default {
     }
   },
   computed: {
+    cart () {
+      return this.$store.getters.getCart
+    },
+    alsoItems () {
+      return this.$store.getters.getAlso
+    },
+    recentItems () {
+      return this.$store.getters.getRecent
+    },
+    extraItems () {
+      return this.$store.getters.getExtra
+    },
+    laterItems () {
+      return this.$store.getters.getLater
+    },
     subtotal () {
       let result = 0
       for (let i in this.items) {
@@ -234,11 +249,13 @@ export default {
         left: 0,
         behavior: 'smooth'
       })
-      this.$emit('confirmed', this.items)
+      // this.$emit('confirmed', this.items)
+      this.$router.push({name: 'Checkout'})
     },
     removeItemPressed (index) {
       this.items.splice(index, 1)
-      this.$emit('updated', this.items)
+      //
+      this.$store.dispatch('setCart', this.items)
     },
     xPressed (index) {
       this.items[index].isXPressed = !this.items[index].isXPressed
@@ -256,15 +273,20 @@ export default {
       tempItem['isBeingAddedToCart'] = false
       this.later.push(this.items[index])
       this.items.splice(index, 1)
-      this.$emit('updated', this.items)
+      //
+      this.$store.dispatch('setCart', this.items)
+      this.$store.dispatch('setLater', this.later)
     },
     addFromLaterPressed (index) {
       this.later[index].isBeingAddedToCart = true
       this.items.push(this.later[index])
       setTimeout(() => {
         this.later.splice(index, 1)
+        this.$store.dispatch('setLater', this.later)
       }, 500)
-      this.$emit('updated', this.items)
+      //
+      this.$store.dispatch('setCart', this.items)
+      // this.$emit('updated', this.items)
     },
     addFromAlsoPressed (index) {
       this.also[index].isBeingAddedToCart = true
@@ -276,9 +298,12 @@ export default {
         if (this.extra.length > 0) {
           this.also.push(this.extra[0])
           this.extra.splice(0, 1)
+          this.$store.dispatch('setAlso', this.also)
+          this.$store.dispatch('setExtra', this.extra)
         }
       }, 1000)
-      this.$emit('updated', this.items)
+      // this.$emit('updated', this.items)
+      this.$store.dispatch('setCart', this.items)
     },
     addFromRecentPressed (index) {
       this.recent[index].isBeingAddedToCart = true
@@ -290,9 +315,12 @@ export default {
         if (this.extra.length > 0) {
           this.recent.push(this.extra[0])
           this.extra.splice(0, 1)
+          this.$store.dispatch('setRecent', this.recent)
+          this.$store.dispatch('setExtra', this.extra)
         }
       }, 1000)
-      this.$emit('updated', this.items)
+      // this.$emit('updated', this.items)
+      this.$store.dispatch('setCart', this.items)
       // var rect = element.getBoundingClientRect();
       // console.log(rect.top, rect.right, rect.bottom, rect.left);
       // let lastIndex = this.items.length - 1
@@ -319,7 +347,7 @@ export default {
         this.addFromLaterPressed(item.index)
       }
       this.doShowPreview = false
-      this.$emit('updated', this.items)
+      // this.$emit('updated', this.items)
     },
     openPreview (section, index) {
       if (section === 'items') {
@@ -418,13 +446,13 @@ export default {
   //   // height: 130px;
   // }
 }
-.list-ani-enter, .list-ani-leave-to
-/* .list-complete-leave-active below version 2.1.8 */ {
+.list-ani-enter, .list-ani-leave-to {
   opacity: 0;
-  // transform: rotateX(90deg);
-  // transform: perspective(500px) translate3d(10px, 0, 100px);
+}
+
+.cart-list-ani-enter, .cart-list-ani-leave-to {
+  opacity: 0;
   height: 0px;
-  // overflow: hidden;
 }
 
 //

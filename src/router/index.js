@@ -12,6 +12,10 @@ import C2b from '@/components/C/2b/C2b.vue'
 import C3 from '@/components/C/3/C3.vue'
 import D1 from '@/components/D/1/D1.vue'
 import D2 from '@/components/D/2/D2.vue'
+import Start from '@/components/D/2/Start.vue'
+import ShoppingCart from '@/components/D/2/ShoppingCart.vue'
+import Checkout from '@/components/D/2/Checkout.vue'
+import ExtraSignup from '@/components/D/2/ExtraSignup.vue'
 
 Vue.use(Router)
 
@@ -74,8 +78,31 @@ export default new Router({
     },
     {
       path: '/D/2',
+      redirect: '/D/2/start',
       name: 'D2',
-      component: D2
+      component: D2,
+      children: [
+        {
+          path: '/D/2/start',
+          name: 'Start',
+          component: Start
+        },
+        {
+          path: '/D/2/cart',
+          name: 'ShoppingCart',
+          component: ShoppingCart
+        },
+        {
+          path: '/D/2/checkout',
+          name: 'Checkout',
+          component: Checkout
+        },
+        {
+          path: '/D/2/complete',
+          name: 'Complete',
+          component: ExtraSignup
+        }
+      ]
     }
   ]
 })

@@ -31,21 +31,27 @@
 <script>
 export default {
   name: 'ShoppingCartMin',
-  props: [
-    'cart'
-  ],
+  // props: [
+  //   'cart'
+  // ],
   data () {
     return {
     }
   },
+  computed: {
+    cart () {
+      return this.$store.getters.getCart
+    }
+  },
   methods: {
     editPressed () {
-      window.scroll({
-        top: 0,
-        left: 0,
-        behavior: 'smooth'
-      })
-      this.$emit('edit')
+      // window.scroll({
+      //   top: 0,
+      //   left: 0,
+      //   behavior: 'smooth'
+      // })
+      // this.$emit('edit')
+      this.$router.push({name: 'ShoppingCart'})
     }
   }
 }

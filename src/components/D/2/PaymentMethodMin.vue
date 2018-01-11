@@ -8,7 +8,7 @@
       <div style="font-size: 19px; font-weight: 900;">Payment information</div>
       <div style="padding-top: 12px;" v-if="selectedPayment === null">
         <button class="boxed primary" style="background-color: #3a84e8;" @click="addPressed()">Add payment method</button>
-        <div style="font-size: 14px; padding-top:12px; "><button @click="openSignIn()" style="font-size: 13px; padding: 3px 8px; color:#3a84e8; border: 1px solid; border-radius: 4px;">Sign in</button> for 1-click checkout</div>
+        <div style="font-size: 14px; padding-top:12px;" v-if="!isSignedIn"><button @click="openSignIn()" style="font-size: 13px; padding: 3px 8px; color:#3a84e8; border: 1px solid; border-radius: 4px;">Sign in</button> for 1-click checkout</div>
       </div>
       <div style="padding-top: 8px;" v-else>
         <div>{{payments[selectedPayment].name}}</div>
@@ -69,6 +69,11 @@ export default {
       doShowMethodsList: false
     }
   },
+  computed: {
+    isSignedIn () {
+      return this.$store.getters.getIsSignedIn
+    }
+  },
   methods: {
     addPressed () {
       this.$emit('add')
@@ -77,7 +82,7 @@ export default {
       this.doShowMethodsList = true
     },
     choosePressed (index) {
-      this.$emit('change', index)
+      this.$store.dispatch('setSelectedPayment', index)
       this.doShowMethodsList = false
       //
     },

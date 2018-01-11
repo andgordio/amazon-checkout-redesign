@@ -8,13 +8,13 @@
       <div style="font-size: 19px; font-weight: 900;">Shipping address</div>
       <div style="padding-top: 12px;" v-if="selectedAddress === null">
         <button class="boxed primary" style="background-color: #3a84e8;" @click="addPressed">Add shipping address</button>
-        <div style="font-size: 14px; padding-top:12px; "><button @click="openSignIn()" style="font-size: 13px; padding: 3px 8px; color:#3a84e8; border: 1px solid; border-radius: 4px;">Sign in</button> for 1-click checkout</div>
+        <div v-if="!isSignedIn" style="font-size: 14px; padding-top:12px; "><button @click="openSignIn()" style="font-size: 13px; padding: 3px 8px; color:#3a84e8; border: 1px solid; border-radius: 4px;">Sign in</button> for 1-click checkout</div>
       </div>
       <div style="padding-top: 8px;" v-else>
-        <div>{{reactiveAddresses[selectedAddress].name}}</div>
-        <div style="padding-top: 4px;">{{reactiveAddresses[selectedAddress].address1}} <!--{{selectedAddress.address2}} --></div>
-        <div style="padding-top: 4px;">{{reactiveAddresses[selectedAddress].city}}, {{reactiveAddresses[selectedAddress].state}}, {{reactiveAddresses[selectedAddress].country}}</div>
-        <div style="padding-top: 4px;">{{reactiveAddresses[selectedAddress].phone}}</div>
+        <div>{{addresses[selectedAddress].name}}</div>
+        <div style="padding-top: 4px;">{{addresses[selectedAddress].address1}} <!--{{selectedAddress.address2}} --></div>
+        <div style="padding-top: 4px;">{{addresses[selectedAddress].city}}, {{addresses[selectedAddress].state}}, {{addresses[selectedAddress].country}}</div>
+        <div style="padding-top: 4px;">{{addresses[selectedAddress].phone}}</div>
         <div style="color: transparent; width: 0; height: 0; overflow: hidden;">{{reactivator}}</div>
         <!-- OVERLAY -->
         <transition name="popover">
@@ -78,8 +78,8 @@ export default {
     }
   },
   computed: {
-    reactiveAddresses () {
-      return this.addresses
+    isSignedIn () {
+      return this.$store.getters.getIsSignedIn
     }
   },
   methods: {
@@ -93,9 +93,8 @@ export default {
       // this.$emit('edit')
     },
     choosePressed (index) {
-      this.$emit('change', index)
+      this.$store.dispatch('setSelectedAddress', index)
       this.doShowAddressesList = false
-      //
     },
     addNewAddressPressed () {
       this.doShowAddressesList = false

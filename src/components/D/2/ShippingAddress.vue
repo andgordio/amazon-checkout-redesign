@@ -188,8 +188,9 @@ export default {
       setTimeout(() => {
         this.checkIfCanScroll()
       }, 100)
-      this.shouldComeBackToManager = false
+      this.shouldComeBackToManager = true
       this.$emit('add')
+      this.clearForm()
     },
     editSelectedPressed (index) {
       setTimeout(() => {
@@ -260,6 +261,15 @@ export default {
       this.zip = {value: this.addresses[this.selectedAddress].zip, isValid: true, wasFocused: false}
       this.country = {value: this.addresses[this.selectedAddress].country, isValid: true, wasFocused: false}
       this.phone = {value: this.addresses[this.selectedAddress].phone, isValid: true, wasFocused: false}
+    },
+    clearForm () {
+      this.name = {value: '', isValid: true, wasFocused: false}
+      this.address1 = {value: '', isValid: true, wasFocused: false}
+      this.city = {value: '', isValid: true, wasFocused: false}
+      this.state = {value: '', isValid: true, wasFocused: false}
+      this.zip = {value: '', isValid: true, wasFocused: false}
+      this.country = {value: '', isValid: true, wasFocused: false}
+      this.phone = {value: '', isValid: true, wasFocused: false}
     }
   },
   watch: {

@@ -72,7 +72,11 @@ export default {
   },
   computed: {
     selectedVersion () {
-      return this.$route.name
+      if (this.$route.name === 'ShoppingCart' || this.$route.name === 'Start' || this.$route.name === 'Checkout' || this.$route.name === 'Complete') {
+        return 'D2'
+      } else {
+        return this.$route.name
+      }
     },
     isHome () {
       return this.$route.name === 'HelloWorld'

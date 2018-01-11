@@ -174,6 +174,7 @@ export default {
       }, 100)
       this.shouldComeBackToManager = false
       this.$emit('add')
+      this.clearForm()
     },
     editSelectedPressed (index) {
       setTimeout(() => {
@@ -222,6 +223,12 @@ export default {
       this.number = {value: this.payments[this.selectedPayment].number, isValid: true, wasFocused: false}
       this.month = {value: this.payments[this.selectedPayment].month, isValid: true, wasFocused: false}
       this.year = {value: this.payments[this.selectedPayment].year, isValid: true, wasFocused: false}
+    },
+    clearForm () {
+      this.name = {value: '', isValid: true, wasFocused: false}
+      this.number = {value: '', isValid: true, wasFocused: false}
+      this.month = {value: '', isValid: true, wasFocused: false}
+      this.year = {value: '', isValid: true, wasFocused: false}
     }
   },
   created () {

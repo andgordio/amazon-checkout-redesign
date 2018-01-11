@@ -67,8 +67,8 @@ export default {
   props: [
     'selectedAddress',
     'selectedPayment',
-    'cart',
-    'delivery'
+    'cart'
+    // 'delivery'
   ],
   computed: {
     canPlaceOrder () {
@@ -82,7 +82,7 @@ export default {
       return sum.toFixed(2)
     },
     deliveryPrice () {
-      switch (this.delivery) {
+      switch (this.$store.getters.getChosenDelivery) {
         case '0':
           return 0
         case '1':

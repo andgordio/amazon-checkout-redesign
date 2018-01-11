@@ -46,13 +46,11 @@ export default {
   },
   computed: {
     delivery: {
-      // getter
       get: function () {
-        return this.chosenDelivery
+        return this.$store.getters.getChosenDelivery
       },
-      // setter
       set: function (newValue) {
-        this.$emit('deliveryChosen', newValue)
+        this.$store.dispatch('setChosenDelivery', newValue)
       }
     }
   }
