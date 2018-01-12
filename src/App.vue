@@ -24,10 +24,10 @@ export default {
             name: 'D',
             description: 'Final preparations',
             versions: [
-              // {
-              //   name: '3',
-              //   description: 'Login, animation, layout'
-              // },
+              {
+                name: '3',
+                description: 'Extra screen, cherries on top'
+              },
               // {
               //   name: '2b',
               //   description: 'Instance manager: quick menu only'

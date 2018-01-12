@@ -1,12 +1,12 @@
 <template>
 <transition name="info-appear" appear>
-  <div class="fixed flexy align-top fading" style="width: 50%; padding-right: 40px;">
+  <div class="fixed flexy align-top" style="width: 50%; padding-right: 40px;">
     <div class="fixed" style="width: 48px; margin-right: 12px;">
       <img src="./../../../assets/icn-check-payment.png" style="width:48px;" alt="">
     </div>
     <div style="padding-top: 12px;">
       <div style="font-size: 19px; font-weight: 900;">Payment information</div>
-      <div style="padding-top: 12px; position: relative;" v-if="selectedPayment === null">
+      <div style="padding-top: 12px;" v-if="selectedPayment === null">
         <!-- <div id="loader">
           <div class="pulse-container">
             <div class="pulse1"></div>
@@ -124,9 +124,9 @@ export default {
   // color: white;
 }
 
-.fading {
-  transition: opacity .4s;
-}
+// .fading {
+//   transition: opacity .4s;
+// }
 
 .hoverableItem:hover {
   background-color: #f7f7f7;
@@ -163,10 +163,10 @@ export default {
 //
 
 .info-appear-enter-active, .info-appear-leave-active {
-  transition: all .3s .2s;
+  transition: all .3s .2s !important;
 }
 .info-appear-enter, .info-appear-leave-to {
-  opacity: 0;
+  opacity: 0 !important;
 }
 
 //
@@ -175,11 +175,6 @@ export default {
 //
 //
 //
-.dimmed {
-  & #loader {
-    display: none !important;
-  }
-}
 
 
 #loader {

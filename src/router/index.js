@@ -12,10 +12,17 @@ import C2b from '@/components/C/2b/C2b.vue'
 import C3 from '@/components/C/3/C3.vue'
 import D1 from '@/components/D/1/D1.vue'
 import D2 from '@/components/D/2/D2.vue'
+import D3 from '@/components/D/3/D3.vue'
+//
 import Start from '@/components/D/2/Start.vue'
 import ShoppingCart from '@/components/D/2/ShoppingCart.vue'
 import Checkout from '@/components/D/2/Checkout.vue'
 import ExtraSignup from '@/components/D/2/ExtraSignup.vue'
+//
+import Start2 from '@/components/D/3/Start.vue'
+import ShoppingCart2 from '@/components/D/3/ShoppingCart.vue'
+import Checkout2 from '@/components/D/3/Checkout.vue'
+import ExtraSignup2 from '@/components/D/3/ExtraSignup.vue'
 
 Vue.use(Router)
 
@@ -101,6 +108,34 @@ export default new Router({
           path: '/D/2/complete',
           name: 'Complete',
           component: ExtraSignup
+        }
+      ]
+    },
+    {
+      path: '/D/3',
+      redirect: '/D/3/start',
+      name: 'D3',
+      component: D3,
+      children: [
+        {
+          path: '/D/3/start',
+          name: 'Start2',
+          component: Start2
+        },
+        {
+          path: '/D/3/cart',
+          name: 'ShoppingCart2',
+          component: ShoppingCart2
+        },
+        {
+          path: '/D/3/checkout',
+          name: 'Checkout2',
+          component: Checkout2
+        },
+        {
+          path: '/D/3/complete',
+          name: 'Complete2',
+          component: ExtraSignup2
         }
       ]
     }

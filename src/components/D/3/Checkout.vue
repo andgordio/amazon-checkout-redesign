@@ -31,6 +31,7 @@
                           :selectedPayment="selectedPayment"
                           :cart="cart"
                           :delivery="chosenDelivery"
+                          class="dimmy"
                           :class="{dimmed: selectedAddress === null || selectedPayment === null}"
                           @placed="placeOrderPressed()"/>
           <div class="padding-vert-l">
@@ -38,6 +39,7 @@
               <ShippingAddressMin   :selectedAddress="selectedAddress"
                                     :addresses="addresses"
                                     :reactivator="reactivator"
+                                    class="dimmy"
                                     :class="{dimmed: selectedAddress !== null && selectedPayment === null}"
                                     @add="addAddressPressed()"
                                     @signin="signInPressed()"
@@ -46,6 +48,7 @@
               <PaymentMethodMin     :selectedPayment="selectedPayment"
                                     :payments="payments"
                                     :reactivator="reactivator"
+                                    class="dimmy"
                                     :class="{dimmed: selectedAddress === null}"
                                     @add="addPaymentPressed()"
                                     @signin="signInPressed()"
@@ -53,7 +56,7 @@
                                     />
             </div>
             <div class="flexy align-stretch" style="padding-top: 32px;">
-              <ShoppingCartMin :class="{dimmed: selectedAddress === null || selectedPayment === null}"/>
+              <ShoppingCartMin class="dimmy" :class="{dimmed: selectedAddress === null || selectedPayment === null}"/>
               <Delivery :class="{dimmed: selectedAddress === null || selectedPayment === null}"/>
             </div>
           </div>
@@ -251,20 +254,20 @@ export default {
     },
     //
     placeOrderPressed () {
-      this.$router.push({name: 'Complete'})
+      this.$store.dispatch('setCart', [])
+      this.$router.push({name: 'Complete2'})
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.dimmy {
+  transition: all .3s
+}
 .dimmed {
-  // opacity: 0.3;
-  // -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-  // filter: grayscale(100%);
-
-  & #loader {
-    display: none !important;
-  }
+  opacity: 0.3;
+  -webkit-filter: grayscale(100%) brightness(120%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%) brightness(120%);
 }
 </style>

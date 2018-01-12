@@ -74,6 +74,8 @@ export default {
     selectedVersion () {
       if (this.$route.name === 'ShoppingCart' || this.$route.name === 'Start' || this.$route.name === 'Checkout' || this.$route.name === 'Complete') {
         return 'D2'
+      } else if (this.$route.name === 'ShoppingCart2' || this.$route.name === 'Start2' || this.$route.name === 'Checkout2' || this.$route.name === 'Complete2') {
+        return 'D3'
       } else {
         return this.$route.name
       }
@@ -105,7 +107,13 @@ export default {
       this.$router.push('/')
     },
     isSelected (iteration, version) {
-      return this.$route.name === iteration + '' + version
+      if (this.$route.name === 'ShoppingCart' || this.$route.name === 'Start' || this.$route.name === 'Checkout' || this.$route.name === 'Complete') {
+        return iteration + '' + version === 'D2'
+      } else if (this.$route.name === 'ShoppingCart2' || this.$route.name === 'Start2' || this.$route.name === 'Checkout2' || this.$route.name === 'Complete2') {
+        return iteration + '' + version === 'D3'
+      } else {
+        return this.$route.name === iteration + '' + version
+      }
     }
   },
   created () {
