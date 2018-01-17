@@ -51,7 +51,7 @@ export default {
       //   behavior: 'smooth'
       // })
       // this.$emit('edit')
-      this.$router.push({name: 'ShoppingCart'})
+      this.$router.push({name: 'ShoppingCart2'})
     }
   }
 }
